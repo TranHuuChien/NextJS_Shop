@@ -1,0 +1,32 @@
+import AppSidebar from '@/components/application/admin/AppSidebar'
+import ThemeProvider from '@/components/application/admin/ThemeProvider'
+import TopBar from '@/components/application/admin/Topbar'
+import { SidebarProvider } from '@/components/ui/sidebar'
+import React from 'react'
+
+const layout = ({ children }) => {
+
+  return (
+    <ThemeProvider 
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+      <SidebarProvider>
+        <AppSidebar />
+        <main className='border-2 md:w-[calc(100vw-16rem)]'>
+          <div className='pt-[70px]  min-h-[calc(100vh-40px)] pb-10 relative '>
+            <TopBar />
+            {children}
+          </div>
+          <div className='border-t h-[40px] flex justify-center items-center bg-gray-500 dark:bg-background text-sm'>
+            2025 Developer All right reserved
+          </div>
+        </main>
+      </SidebarProvider>
+    </ThemeProvider>
+  )
+}
+
+export default layout
