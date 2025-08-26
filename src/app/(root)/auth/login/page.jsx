@@ -18,7 +18,7 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import ButtonLoading from '@/components/application/ButtonLoading'
+import ButtonLoading from '@/components/Application/ButtonLoading'
 import { z } from 'zod'
 import { FaRegEyeSlash } from 'react-icons/fa'
 import { FaRegEye } from 'react-icons/fa'

@@ -9,11 +9,12 @@ import { RiCoupon2Line } from 'react-icons/ri'
 import { title } from 'process'
 import { url } from 'inspector'
 import { icons } from 'lucide-react'
+import { ADMIN_CATEGORY_ADD, ADMIN_CATEGORY_DASHBOARD, ADMIN_CATEGORY_EDIT, ADMIN_CATEGORY_SHOW, ADMIN_DASHBOARD, ADMIN_MEDIA_SHOW } from '@/routes/AdminPanelRoute'
 
 export const adminAppSidebarMenu = [
     {
         title: "Dashboard",
-        url: '',
+        url:   ADMIN_DASHBOARD,
         icon: AiOutlineDashboard
     },
     {
@@ -22,21 +23,17 @@ export const adminAppSidebarMenu = [
         icon: BiCategory,
         submenu: [
             {
-                title: "Add category",
-                url: '#'
+                title: "Add Category",
+                url: ADMIN_CATEGORY_ADD
             },
             {
-                title: "Add variant",
-                url: '#'
+                title: "ALL Category",
+                url: ADMIN_CATEGORY_SHOW
             },
-            {
-                title: "All Product",
-                url: '#'
-            },
-            {
-                title: "Product variant",
-                url: '#'
-            }
+            // {
+            //     title: "Edit Category",
+            //     url: ADMIN_CATEGORY_EDIT
+            // }
         ]
     },
     {
@@ -68,5 +65,10 @@ export const adminAppSidebarMenu = [
         title: "Rating & Review",
         url: '#',
         icon: IoMdStarOutline,
+    },
+    {
+        title: 'Media',
+        url: ADMIN_MEDIA_SHOW,
+        icon: MdOutlinePermMedia
     }
 ]

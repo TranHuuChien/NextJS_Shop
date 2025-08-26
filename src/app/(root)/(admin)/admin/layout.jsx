@@ -1,6 +1,6 @@
-import AppSidebar from '@/components/application/admin/AppSidebar'
-import ThemeProvider from '@/components/application/admin/ThemeProvider'
-import TopBar from '@/components/application/admin/Topbar'
+import AppSidebar from '@/components/Application/Admin/AppSidebar'
+import ThemeProvider from '@/components/Application/Admin/ThemeProvider'
+import TopBar from '@/components/Application/Admin/Topbar'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import React from 'react'
 

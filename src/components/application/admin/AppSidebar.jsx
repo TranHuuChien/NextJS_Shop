@@ -24,7 +24,7 @@ import { LuChevronRight } from 'react-icons/lu'
 import { IoMdClose } from 'react-icons/io'
 import { adminAppSidebarMenu } from '@/lib/adminMenuSidebar'
 import { Collapsible } from '@/components/ui/collapsible'
-import { CollapsibleContent, CollapsibleTrigger } from '@radix-ui/react-collapsible'
+import { CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import Link from 'next/link'
 
 const AppSidebar = () => {

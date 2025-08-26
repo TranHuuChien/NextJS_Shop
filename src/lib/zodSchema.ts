@@ -18,4 +18,6 @@ export const zSchema = z.object({
     .min(2, { message: "Name must be at least 2 character"})
     .max(50, { message: "Name must be at least 50 character"})
     .regex(/[a-zA-Z\s]/, { message: "Name can only contain letters and spaces"})
+
+    
 })
