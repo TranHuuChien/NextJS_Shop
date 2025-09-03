@@ -8,6 +8,7 @@ import {
   DialogTrigger 
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
+import Link from 'next/link'
 import React, { useState } from 'react'
 
 const SearchModel = ({ open, setOpen }) => {
@@ -28,6 +29,17 @@ const SearchModel = ({ open, setOpen }) => {
               onChange={(e) => setQuery(e.target.value)}
               autoFocus
             />
+
+            <ul className='mt-4 max-h-60 overflow-y-auto'>
+              <li>
+                <Link href='' className='block py-2 px-3 rounded hover:bg-muted'>
+                  <h4 className='font-medium'>
+                    Title
+                  </h4>
+                  <p className='text-sm text-muted-foreground'>Lorem ipsum dolor sit</p>
+                </Link>
+              </li>
+            </ul>
         </DialogContent>
     </Dialog>
   )

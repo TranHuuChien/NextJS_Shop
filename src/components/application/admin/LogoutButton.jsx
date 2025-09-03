@@ -3,7 +3,7 @@ import axios from 'axios'
 import React from 'react'
 import { AiOutlineLogout } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
-import { logout } from '@/store/reducer/authReducer'
+import { logout } from '@/store/reducer/authSlice'
 import { useRouter } from 'next/navigation'
 import { WEBSITE_LOGIN } from '@/routes/WebsiteRoute'
 

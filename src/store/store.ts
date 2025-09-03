@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // localStorage
-import authReducer from './reducer/authReducer';
+import { authSlice } from './reducer/authSlice';
 //import langReducer from './reducer/langReducer';
 
 import { combineReducers } from '@reduxjs/toolkit'
 
 const rootReducer = combineReducers({
-  auth: authReducer,
+  auth: authSlice.reducer,
   //: langReducer
 })
 
