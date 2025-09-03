@@ -26,6 +26,7 @@ import { adminAppSidebarMenu } from '@/lib/adminMenuSidebar'
 import { Collapsible } from '@/components/ui/collapsible'
 import { CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import Link from 'next/link'
+import { DropdownMenu, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
 const AppSidebar = () => {
     //console.log(adminAppSidebarMenu)
@@ -34,14 +35,18 @@ const AppSidebar = () => {
     return (
         <Sidebar className='z-50'>
             <SidebarHeader className='border-b h-14'>
-                <div className='flex justify-between items-center px-4'>
-                    <Image src={logoBlack.src} height={20} width={logoBlack.width} className='block dark:hidden h-[50px] w-auto' alt='logo dark' />
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <div className='flex justify-between items-center px-4'>
+                            <Image src={logoBlack.src} height={20} width={logoBlack.width} className='block dark:hidden h-[50px] w-auto' alt='logo dark' />
 
-                    <Image src={logoWhite.src} height={50} width={logoWhite.width} className='hidden dark:block h-[50px] w-auto' alt='logo white'/>
-                    <Button onClick={toggleSidebar} type='button' size="icon" >
-                        <IoMdClose color='#7f0369ff'/>
-                    </Button>
-                </div>
+                            <Image src={logoWhite.src} height={50} width={logoWhite.width} className='hidden dark:block h-[50px] w-auto' alt='logo white'/>
+                            <Button onClick={toggleSidebar} type='button' size="icon" variant="ghost" >
+                                <IoMdClose color='#7f0369ff' />
+                            </Button>
+                        </div>
+                    </DropdownMenuTrigger>
+                </DropdownMenu>
             </SidebarHeader>
             <SidebarContent className='p-3'>
                 <SidebarMenu>

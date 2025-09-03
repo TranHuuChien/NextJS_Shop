@@ -4,6 +4,7 @@ import {
   DialogContent, 
   DialogDescription, 
   DialogHeader, 
+  DialogOverlay, 
   DialogTitle, 
   DialogTrigger 
 } from '@/components/ui/dialog'
@@ -12,9 +13,10 @@ import React, { useState } from 'react'
 
 const SearchModel = ({ open, setOpen }) => {
   const [query, setQuery] = useState('')
+  //console.log(query)
   return (
     <Dialog open={open} onOpenChange={() => setOpen(!open)} >
-        <DialogContent className="z-60">
+        <DialogContent className="z-[100]">
             <DialogHeader>
               <DialogTitle>Are you absolutely sure?</DialogTitle>
               <DialogDescription>

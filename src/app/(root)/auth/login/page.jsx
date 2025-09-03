@@ -26,6 +26,7 @@ import Link from 'next/link'
 import { WEBSITE_REGISTER, WEBSITE_RESETPASSWORD } from '@/routes/WebsiteRoute'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
+import { loginAuth } from '@/api/auth'
 
 const LoginPage = () => {
   //const dispatch = useDispatch()
@@ -48,9 +49,10 @@ const LoginPage = () => {
   const handleLoginSubmit = async (values) => {
     try {
       setLoading(true)
-      const { data: registerResponse } = await axios.post('/api/login/login', values)
-      if (!registerResponse) {
-        throw new Error(registerResponse.message)
+      //const { data: registerResponse } = await axios.post('/api/login/login', values)
+      const { data: loginResponse } = loginAuth(values);
+      if (!loginResponse) {
+        throw new Error(loginResponse.message)
       }
       set
     } catch (error) {
