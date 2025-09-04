@@ -24,7 +24,8 @@ export const adminAppSidebarMenu = [
         submenu: [
             {
                 title: "Add Category",
-                url: ADMIN_CATEGORY_ADD
+                url: ADMIN_CATEGORY_ADD,
+                
             },
             {
                 title: "ALL Category",

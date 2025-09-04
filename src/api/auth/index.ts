@@ -18,3 +18,4 @@ export const logoutAuth = async () => {
   const res = await axios.post(`${API_ENDPOINT.AUTH.INDEX}/logout`)
   return res.data
 }
+

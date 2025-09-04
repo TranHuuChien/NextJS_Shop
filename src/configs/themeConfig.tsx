@@ -16,7 +16,7 @@ type ThemeConfig = {
 }
 
 const themeConfig : ThemeConfig = {
-    templateName: 'ChienShop',
+    templateName: 'ShopShoes',
     skin: 'default',
     mode: 'light' as Mode,
     direction: 'ltr',
