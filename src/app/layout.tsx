@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/component/Navbar";
-import Footer from "@/component/Footer";
 import GlobalProvider from "@/components/Application/GlobalProvider";
 
 const inter = Inter({ weight: ['400', '500', '600', '700', '800'], subsets: ["latin"], display: 'swap' });

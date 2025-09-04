@@ -8,7 +8,6 @@ import { combineReducers } from '@reduxjs/toolkit'
 
 const rootReducer = combineReducers({
   auth: authSlice.reducer,
-  //: langReducer
 })
 
 const persistConfig = {
@@ -23,5 +22,4 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) => 
         getDefaultMiddleware({serializableCheck: false})
 })
-console.log(store)
 export const persistor = persistStore(store)

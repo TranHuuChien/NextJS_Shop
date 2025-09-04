@@ -1,7 +1,8 @@
+'use client'
 import { TypeLang } from '@/module'
 import { langSlice } from '@/store/reducer/langSlice'
 import { langSelector } from '@/store/selector/langSelector'
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -10,19 +11,39 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import imgEN from '../../assets/images/.png';
-import imgVN from '../../assets/images/vietnam';
+import imgEN from '@public/assets/images_copy/en.svg'
+import imgVN from '@public/assets/images_copy/vn.svg';
 
 interface Props {
 }
 
 const HeaderChangeLanguages = (props: Props) => {
     const { dataLang, lang } = useSelector(langSelector)
+    
     const dispatch = useDispatch()
     const { changeLang } = langSlice.actions
+    const imageForLang = (langStr: string) => {
+        switch(langStr) {
+            case 'vi':
+                return imgVN
+            case 'en':
+                return imgEN
+            default:
+                return imgEN
+        }
+    }
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const open = Boolean(anchorEl);
+    const [ imageLang, setImageLang ] = useState(imageForLang(lang))
     function switchImgLang(langStr: TypeLang) {
 
         dispatch(changeLang(langStr))
+    }
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget)
+    }
+    const handleClose = () => {
+        setAnchorEl(null)
     }
     return (
         <>
@@ -78,7 +99,7 @@ const HeaderChangeLanguages = (props: Props) => {
                 >
                     <MenuItem onClick={() => switchImgLang('en')}>
                         <ListItemIcon>
-                            <Avatar src={imgKH} />
+                            <Avatar src={imgEN} />
                         </ListItemIcon>
                         {dataLang.lang.english}
                     </MenuItem>
