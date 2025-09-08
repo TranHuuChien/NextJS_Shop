@@ -35,14 +35,16 @@ const Datatable = ({
     })
 
     //handle delete method
-    const deleteMutation = useDeleteMutation
+    //const deleteMutation = useDeleteMutation()
     const handleDelete = () => {
         let c = true
         if(deleteType == 'PD') {
             c = confirm('Are you sure you want to delete the data permanently?')
+        } else {
+            c = confirm('Are you sure you want to move data into trash?')
         }
         if(c) {
-            deleteMutation.mutate()
+            //deleteMutation.mutate()
         }
     }
 
@@ -130,7 +132,7 @@ const Datatable = ({
                 {deleteType === 'SD'
                     && <Tooltip title="Delete All">
                         <IconButton disabled={!table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()}
-                            onClick={() => handleDelete()}
+                            onClick={() => handleDelete(Object.keys(rowSelection), deleteType)}
                         >
                             <DeleteIcon />
                         </IconButton>
@@ -142,7 +144,7 @@ const Datatable = ({
                     <>
                         <Tooltip title="Restore Data">
                             <IconButton disabled={!table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()}
-                                onClick={() => handleDelete()}
+                                onClick={() => handleDelete(Object.keys(rowSelection), 'RSD')}
                             >
                                 <RestoreFromTrashIcon />
                             </IconButton>

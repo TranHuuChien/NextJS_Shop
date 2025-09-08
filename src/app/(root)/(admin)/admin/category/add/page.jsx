@@ -34,10 +34,10 @@ const AddCategory = () => {
         }
     })
     useEffect(() => {
-        const name = form.getValues()
-        // if (name) {
-        //     form.setValue('slug', slugify(name).toLowerCase())
-        // }
+        const name = form.getValues('name')
+        if (name) {
+            form.setValue('slug', slugify(name).toLowerCase())
+        }
     }, [form.watch('name')])
     const onSubmit = async (values) => {
         setLoading(true)

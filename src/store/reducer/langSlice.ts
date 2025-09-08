@@ -4,15 +4,23 @@ import { kh } from "@/lang/lang.kh";
 import { TypeLang } from "@/module";
 import { createSlice } from "@reduxjs/toolkit";
 
+
 type LangState = {
-  lang: "en" | "vi";
+  lang: "en" | "vi" |'kh';
+};
+
+const getInitialLang = () => {
+  if (typeof window === 'undefined') return 'en'; // tránh lỗi SSR
+  return localStorage.getItem('lang') || 'vi';
 };
 
 const initialState = {
     isLang : true,
     lang : 'en',
     dataLang: (() => {
-        const lang = localStorage.getItem('lang');
+        //const lang = localStorage.getItem('lang') || 'vi';
+        //const lang = 'vi';
+        const lang = getInitialLang()
         switch(lang) {
             case 'vi': 
                 return vi;
@@ -36,10 +44,10 @@ export const langSlice = createSlice({
                 case 'vi':
                     state.dataLang = vi
                 case 'kh':
-                //   state.dataLang = kh;
-                //   break;
+                  state.dataLang = kh;
+                  break;
                 default:
-                    state.dataLang = kh;
+                    state.dataLang = en;
                     break;
                 }
         },

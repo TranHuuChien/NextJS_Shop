@@ -9,7 +9,7 @@ import { RiCoupon2Line } from 'react-icons/ri'
 import { title } from 'process'
 import { url } from 'inspector'
 import { icons } from 'lucide-react'
-import { ADMIN_CATEGORY_ADD, ADMIN_CATEGORY_DASHBOARD, ADMIN_CATEGORY_EDIT, ADMIN_CATEGORY_SHOW, ADMIN_DASHBOARD, ADMIN_MEDIA_SHOW } from '@/routes/AdminPanelRoute'
+import { ADMIN_CATEGORY_ADD, ADMIN_CATEGORY_DASHBOARD, ADMIN_CATEGORY_EDIT, ADMIN_CATEGORY_SHOW, ADMIN_DASHBOARD, ADMIN_MEDIA_SHOW, ADMIN_PRODUCT_ADD, ADMIN_PRODUCT_EDIT, ADMIN_PRODUCT_SHOW } from '@/routes/AdminPanelRoute'
 
 export const adminAppSidebarMenu = [
     {
@@ -28,13 +28,38 @@ export const adminAppSidebarMenu = [
                 
             },
             {
-                title: "ALL Category",
+                title: "All Category",
                 url: ADMIN_CATEGORY_SHOW
             },
             // {
             //     title: "Edit Category",
             //     url: ADMIN_CATEGORY_EDIT
             // }
+        ]
+    },
+    {
+        title: "Product",
+        url: '#',
+        icon: IoShirtOutline,
+        submenu: [
+            {
+                title: "Add Product",
+                url: ADMIN_PRODUCT_ADD,
+                
+            },
+            {
+                title: "Add Variant",
+                url: '#',
+                
+            },
+            {
+                title: "All Product",
+                url: ADMIN_PRODUCT_SHOW
+            },
+            {
+                title: "Product Variants",
+                url: '#'
+            }
         ]
     },
     {
