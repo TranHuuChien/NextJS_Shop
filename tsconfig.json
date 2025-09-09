@@ -10,7 +10,9 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    // "jsx": "preserve",
+    "jsx": "react-jsx",
+    "checkJs": false,
     "incremental": true,
     "types": ["vite/client"],
     "plugins": [

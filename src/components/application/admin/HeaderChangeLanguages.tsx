@@ -13,6 +13,7 @@ import IconButton from '@mui/material/IconButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import imgEN from '@public/assets/images_copy/en.svg'
 import imgVN from '@public/assets/images_copy/vn.svg';
+import Image from 'next/image'
 
 interface Props {
 }
@@ -99,13 +100,15 @@ const HeaderChangeLanguages = (props: Props) => {
                 >
                     <MenuItem onClick={() => switchImgLang('en')}>
                         <ListItemIcon>
-                            <Avatar src={imgEN} />
+                            {/* <Avatar src={imgEN} /> */}
+                            <Image src={imgEN} alt=''/>
                         </ListItemIcon>
                         {dataLang.lang.english}
                     </MenuItem>
                     <MenuItem onClick={() => switchImgLang('vi')}>
                         <ListItemIcon>
-                            <Avatar src={imgVN} />
+                            {/* <Avatar src={imgVN} /> */}
+                            <Image src={imgVN} alt=''/>
                         </ListItemIcon>
                         {dataLang.lang.vietnam}
                     </MenuItem>
