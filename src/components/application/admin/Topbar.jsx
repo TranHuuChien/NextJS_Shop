@@ -1,4 +1,5 @@
 import React from 'react'
+import dynamic from "next/dynamic";
 import ThemeSwitch from './ThemeSwitch'
 import UserDropdown from './UserDropdown'
 import { Button } from '@/components/ui/button'
@@ -26,6 +27,8 @@ import logoWhite from '@public/assets/images/logo-white.png'
 import AdminSearchMobile from './AdminSearchMobile'
 import HeaderChangeLanguages from './HeaderChangeLanguages'
 
+
+
 const TopBar = () => {
   //const { toggleSidebar } = useSidebar()
   return (
@@ -43,8 +46,10 @@ const TopBar = () => {
         <div className='flex items-center'>
           <AdminSearchMobile />
           <ThemeSwitch/>
-          <HeaderChangeLanguages/>
+          
           <UserDropdown/>
+
+          <HeaderChangeLanguages/>
           {/* <Button type='button' size='icon' className='ms-2' onClick={toggleSidebar}>
             <RiMenu4Fill/>
           </Button> */}

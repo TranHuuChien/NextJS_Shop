@@ -36,6 +36,8 @@ const HeaderChangeLanguages = (props: Props) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const [ imageLang, setImageLang ] = useState(imageForLang(lang))
+    
+    console.log(imageLang)
     function switchImgLang(langStr: TypeLang) {
 
         dispatch(changeLang(langStr))
@@ -59,7 +61,7 @@ const HeaderChangeLanguages = (props: Props) => {
                             aria-haspopup='true'
                             aria-expanded={open ? 'true' : undefined}
                         >
-                            <Avatar sx={{ width: 33, height: 33 }} src={imageLang}></Avatar>
+                            <Image src={imageLang} alt='avatar'></Image>
                         </IconButton>
                     </Tooltip>
                 </Box>
@@ -101,14 +103,14 @@ const HeaderChangeLanguages = (props: Props) => {
                     <MenuItem onClick={() => switchImgLang('en')}>
                         <ListItemIcon>
                             {/* <Avatar src={imgEN} /> */}
-                            <Image src={imgEN} alt=''/>
+                            <Image src={imgEN} alt='English'/>
                         </ListItemIcon>
                         {dataLang.lang.english}
                     </MenuItem>
                     <MenuItem onClick={() => switchImgLang('vi')}>
                         <ListItemIcon>
                             {/* <Avatar src={imgVN} /> */}
-                            <Image src={imgVN} alt=''/>
+                            <Image src={imgVN} alt='Vietnamese'/>
                         </ListItemIcon>
                         {dataLang.lang.vietnam}
                     </MenuItem>

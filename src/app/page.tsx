@@ -1,6 +1,8 @@
-const HomePage = () => {
+import React from 'react'
+
+const HomePage = ({ children }) => {
   return (
-    <div className=''>HomePage</div>
+    <div>{ children }</div>
   )
 }
 

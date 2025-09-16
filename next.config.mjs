@@ -5,7 +5,7 @@ const nextConfig = {
         defaultLocale: 'en',    
         localeDetection: true,  
     },
-
+    //reactStrictMode: false
 };
 
 export default nextConfig;
