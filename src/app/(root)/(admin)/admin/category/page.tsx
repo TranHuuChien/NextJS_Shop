@@ -6,30 +6,49 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
  import { ADMIN_CATEGORY_ADD, ADMIN_CATEGORY_EDIT, ADMIN_CATEGORY_SHOW, ADMIN_DASHBOARD, ADMIN_TRASH } from '@/routes/AdminPanelRoute'
 import Link from 'next/link'
 import { FiPlus } from 'react-icons/fi'
-import React, { useCallback, useMemo } from 'react'
-import DatatableWrapper from '@/components/Application/Admin/DatatableWrapper'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
+//import DatatableWrapper from '@/components/Application/Admin/DatatableWrapper'
 import { DT_CATEGORY_COLUMN } from '@/lib/column'
 import { columnConfig } from '@/lib/helperFunction'
-import DeleteAction from '@/components/Application/Admin/DeleteAction'
-import EditAction from '@/components/Application/Admin/EditAction'
+// import DeleteAction from '@/components/Application/Admin/DeleteAction'
+// import EditAction from '@/components/Application/Admin/EditAction'
+import { DataTable } from '@/components/application/admin/DataTable'
+import { CATEGORY_TYPE } from '@/lib/column'
 
 const breadcrumbData = [
   { href: ADMIN_DASHBOARD, label: "Home" },
   { href: ADMIN_CATEGORY_SHOW, label: 'Category' }
 ]
+
+ async function getData(): Promise<CATEGORY_TYPE[]> {
+  // Fetch data from your API here.
+  return [
+    {
+      name: "The Thao",
+      slug: "the-thao",
+      createDate: '10-12-2025'
+    },
+    // ...
+  ]
+}
+
 const ShowCategory = () => {
 
-  const columns = useMemo(() => {
-    return columnConfig(DT_CATEGORY_COLUMN)
-  }, [])
+  // const columns = useMemo(() => {
+  //   return columnConfig(DT_CATEGORY_COLUMN)
+  // }, [])
 
-  const action = useCallback((row, deleteType, handleDelete) => {
-    let actionMenu = []
-    action.push(<EditAction key='edit' href={ADMIN_CATEGORY_EDIT(row.original._id)}/>)
-    action.push(<DeleteAction key='delete' handleDelete={handleDelete} row={row} deleteType={deleteType}/>)
-    return actionMenu
-  }, [])
+  // const action = useCallback((row, deleteType, handleDelete) => {
+  //   let actionMenu = []
+  //   action.push(<EditAction key='edit' href={ADMIN_CATEGORY_EDIT(row.original._id)}/>)
+  //   action.push(<DeleteAction key='delete' handleDelete={handleDelete} row={row} deleteType={deleteType}/>)
+  //   return actionMenu
+  // }, [])
 
+  const [data, setData] = useState<CATEGORY_TYPE[]>([]);
+  useEffect(() => {
+    getData().then(setData)
+  }, [])
   return (
     <div>
       <BreadCrumb breadcrumbData={breadcrumbData} />
@@ -56,6 +75,8 @@ const ShowCategory = () => {
             trashView={`${ADMIN_TRASH}?trashof=category`}
             createAction={action}
           /> */}
+
+          <DataTable columns={DT_CATEGORY_COLUMN} data={data}/>
         </CardContent>
       </Card> 
     </div>

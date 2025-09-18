@@ -32,6 +32,8 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
       setUser(res.data);
       setLoading(false);
     }).catch((err) => {
+      clearLocalUserData()
+      setUser(null);
       setLoading(false);
     });
     
