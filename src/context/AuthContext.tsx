@@ -1,11 +1,12 @@
 'use client';
-import toast from "react-hot-toast";
+
 import React, { createContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AuthContextType, LoginParams, RegisterParams, UserDataType } from "./type";
 import { useTranslation } from "react-i18next";
 import { loginAuth, logoutAuth, registerAuth } from "@/api/auth";
 import { clearLocalUserData } from "@/lib/store";
+import { toast } from "react-toastify";
 
 const defaultProvider: AuthContextType = {
   loading: true,

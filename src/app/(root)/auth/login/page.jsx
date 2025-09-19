@@ -1,13 +1,13 @@
-'use client'
-import { Card, CardContent } from '@/components/ui/card'
-import Image from 'next/image'
-import React, { useState } from 'react'
-import Logo from '../../../../../public/assets/images/logo-black.png'
+"use client";
+import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
+import React, { useState } from "react";
+import Logo from "../../../../../public/assets/images/logo-black.png";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { zSchema } from '@/lib/zodSchema'
+import { zSchema } from "@/lib/zodSchema";
 import { useForm } from "react-hook-form";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -15,74 +15,88 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import ButtonLoading from '@/components/Application/ButtonLoading'
-import { z } from 'zod'
-import { FaRegEyeSlash } from 'react-icons/fa'
-import { FaRegEye } from 'react-icons/fa'
-import Link from 'next/link'
-import { WEBSITE_REGISTER, WEBSITE_RESETPASSWORD } from '@/routes/WebsiteRoute'
-import axios from 'axios'
-import { useDispatch } from 'react-redux'
-import { loginAuth } from '@/api/auth'
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import ButtonLoading from "@/components/Application/ButtonLoading";
+import { z } from "zod";
+import { FaRegEyeSlash } from "react-icons/fa";
+import { FaRegEye } from "react-icons/fa";
+import Link from "next/link";
+import { WEBSITE_REGISTER, WEBSITE_RESETPASSWORD } from "@/routes/WebsiteRoute";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { loginAuth } from "@/api/auth";
 
 const LoginPage = () => {
   //const dispatch = useDispatch()
-  const [loading, setLoading] = useState(false)
-  const [isTypePassword, setIsTypePassword] = useState(true)
-  const formSchema = zSchema.pick({
-    email: true
-  }).extend({
-    password: z.string().min('3', 'Password fields is required')
-  })
+  const [loading, setLoading] = useState(false);
+  const [isTypePassword, setIsTypePassword] = useState(true);
+  const formSchema = zSchema
+    .pick({
+      email: true,
+    })
+    .extend({
+      password: z.string().min("3", "Password fields is required"),
+    });
 
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      password: ""
-    }
-  })
+      password: "",
+    },
+  });
 
   const handleLoginSubmit = async (values) => {
     try {
-      setLoading(true)
+      setLoading(true);
       //const { data: registerResponse } = await axios.post('/api/login/login', values)
       const { data: loginResponse } = loginAuth(values);
       if (!loginResponse) {
-        throw new Error(loginResponse.message)
+        throw new Error(loginResponse.message);
       }
-      set
-    } catch (error) {
-      
-    }
-  }
+      set;
+    } catch (error) {}
+  };
 
   return (
-    <Card className='w-[450px] '>
+    <Card className="w-[450px] ">
       <CardContent>
-        <div className='flex justify-center'>
-          <Image src={Logo.src} width={Logo.width} height={Logo.height} alt='logo'
-            className='max-w-[100px]' />
+        <div className="flex justify-center">
+          <Image
+            src={Logo.src}
+            width={Logo.width}
+            height={Logo.height}
+            alt="logo"
+            className="max-w-[100px]"
+          />
         </div>
-        <div className='text-center'>
-          <h1 className='text-2xl font-semibold text-center'>Login Info Account</h1>
+        <div className="text-center">
+          <h1 className="text-2xl font-semibold text-center">
+            Login Info Account
+          </h1>
           <p>Login into your account by filling out the form below</p>
         </div>
-        <div className='mt-3'>
+        <div className="mt-3">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleLoginSubmit)} className='space-y-8'>
-              <div className='mb-3'>
+            <form
+              onSubmit={form.handleSubmit(handleLoginSubmit)}
+              className="space-y-8"
+            >
+              <div className="mb-3">
                 <FormField
                   control={form.control}
-                  name='email'
+                  name="email"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input type='email' placeholder='abc@gmail.com' {...field} />
+                        <Input
+                          type="email"
+                          placeholder="abc@gmail.com"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage className="text-red-500" />
                       {/* <FormDescription/> */}
@@ -90,44 +104,67 @@ const LoginPage = () => {
                   )}
                 />
               </div>
-              <div className='mt-3'>
+              <div className="mt-3">
                 <FormField
                   control={form.control}
-                  name='password'
+                  name="password"
                   render={({ field }) => (
-                    <FormItem className='relative'>
+                    <FormItem className="relative">
                       <FormLabel>Password</FormLabel>
-                      <FormControl>
-                        <Input type={isTypePassword ? 'password' : 'text'} placeholder='*******' {...field} />
-                      </FormControl>
-                      <button type='button' className='absolute top-1/2 right-2 cursor-pointer'
-                      onClick={() => setIsTypePassword(!isTypePassword)}>
-                        {isTypePassword ? <FaRegEyeSlash /> : <FaRegEye />}
-                      </button>
-
+                      <div className="flex justify-center items-center">
+                        <FormControl>
+                          <Input
+                            type={isTypePassword ? "password" : "text"}
+                            placeholder="*******"
+                            {...field}
+                          />
+                        </FormControl>
+                        <button
+                          type="button"
+                          className="absolute top-1/2 -translate-y-1/2 right-2 cursor-pointer"
+                          onClick={() => setIsTypePassword(!isTypePassword)}
+                        >
+                          {isTypePassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                        </button>
+                      </div>
                       <FormMessage className="text-red-500" />
                     </FormItem>
                   )}
                 />
               </div>
-              <div className='mt-3'>
-                <ButtonLoading type='submit' text='Login' className='w-full bg-purple-600 text-white' loading={loading}/>
+              <div className="mt-3">
+                <ButtonLoading
+                  type="submit"
+                  text="Login"
+                  className="w-full bg-purple-600 text-white"
+                  loading={loading}
+                />
               </div>
-              <div className='text-center'>
-                  <div className='flex justify-center items-center gap-1'>
-                    <p>Don`t have account</p>
-                    <Link href={WEBSITE_REGISTER} className='text-primary underline'>Create account</Link>
-                  </div>
-                  <div className='flex justify-center items-center gap-1'>
-                    <Link href={WEBSITE_RESETPASSWORD} className='text-primary underline'>Forgot password</Link>
-                  </div>
+              <div className="text-center flex justify-between items-center gap-1">
+                <div className="flex justify-center items-center gap-1">
+                  <p>Don`t have account</p>
+                  <Link
+                    href={WEBSITE_REGISTER}
+                    className="text-primary text-sm underline"
+                  >
+                    Create account
+                  </Link>
+                </div>
+                <div className="">
+                  <Link
+                    href={WEBSITE_RESETPASSWORD}
+                    className="text-primary text-sm underline"
+                  >
+                    Forgot password
+                  </Link>
+                </div>
               </div>
             </form>
           </Form>
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

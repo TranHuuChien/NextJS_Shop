@@ -65,7 +65,7 @@ const RegisterPage = () => {
                 <div className='mt-1'>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(handleRegisterSubmit)} className='space-y-8'>
-                            <div className='mb-1'>
+                            <div className='mb-0'>
                                 <FormField
                                     control={form.control}
                                     name='name'
@@ -80,7 +80,7 @@ const RegisterPage = () => {
                                     )}
                                 />
                             </div>
-                            <div className='mb-1'>
+                            <div className='mb-0'>
                                 <FormField
                                     control={form.control}
                                     name='email'
@@ -95,7 +95,7 @@ const RegisterPage = () => {
                                     )}
                                 />
                             </div>
-                            <div className='mt-1'>
+                            <div className='mt-0'>
                                 <FormField
                                     control={form.control}
                                     name='password'
@@ -114,7 +114,7 @@ const RegisterPage = () => {
                                     )}
                                 />
                             </div>
-                            <div className='mt-1'>
+                            <div className='mt-0'>
                                 <FormField
                                     control={form.control}
                                     name='confirmPassword'
@@ -129,7 +129,7 @@ const RegisterPage = () => {
                                     )}
                                 />
                             </div>
-                            <div className='mt-3'>
+                            <div className='mt-1'>
                                 <ButtonLoading type='submit' text='Register' className='w-full bg-purple-600 text-white' loading={loading}/>
                             </div>
                             <div className='text-center'>
