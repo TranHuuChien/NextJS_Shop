@@ -29,7 +29,6 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
   columns,
   data,
-  pagination
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -86,7 +85,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
+      {/* <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredRowModel().rows.length}
           {totalItems ? 
@@ -100,7 +99,7 @@ export function DataTable<TData, TValue>({
             showPreviousNext
           />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
