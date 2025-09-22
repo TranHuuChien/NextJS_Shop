@@ -17,7 +17,7 @@ const SearchModel = ({ open, setOpen }) => {
   //console.log(query)
   return (
     <Dialog open={open} onOpenChange={() => setOpen(!open)} >
-        <DialogContent className="z-[100]">
+        <DialogContent className="bg-white">
             <DialogHeader>
               <DialogTitle>Are you absolutely sure?</DialogTitle>
               <DialogDescription>

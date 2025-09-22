@@ -4,3 +4,4 @@ export const WEBSITE_REGISTER = '/auth/register'
 export const WEBSITE_RESETPASSWORD = '/auth/reset-password'
 
 export const USER_DASHBOARD = '/user/dashboard'
+export const WEBSITE_SHOP = '/shop'

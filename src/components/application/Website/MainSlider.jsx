@@ -36,12 +36,9 @@ const MainSlider = () => {
     dots: true,
     infinite: true,   // dùng `infinite`, không có `initialize`
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
     autoplay: true,
     prevArrow: <ArrowPrev />,
     nextArrow: <ArrowNext />,
-    
   };
   return (
     <div>

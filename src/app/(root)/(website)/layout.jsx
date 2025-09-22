@@ -10,7 +10,7 @@ const kumbh = Kumbh_Sans({
   subsets: ['latin']
 })
 
-const page = ({ children }) => {
+const layout = ({ children }) => {
   return (
     <div className={kumbh.className}>
       <Header />
@@ -22,5 +22,4 @@ const page = ({ children }) => {
   )
 }
 
-export default page
-
+export default layout
