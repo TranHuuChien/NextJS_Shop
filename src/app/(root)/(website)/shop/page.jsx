@@ -33,7 +33,7 @@ const Shop = () => {
 
                     <Sheet open={mobileFilterOpen} onOpenChange={() => setMobileFilterOpen(false)}>
                         <SheetTrigger>Open</SheetTrigger>
-                        <SheetContent className="bg-white">
+                        <SheetContent side='left' className="bg-white">
                             <SheetHeader>
                                 <SheetTitle>Are you sure</SheetTitle>
                                 <SheetDescription></SheetDescription>

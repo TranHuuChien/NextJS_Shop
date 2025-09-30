@@ -6,6 +6,7 @@ interface Props {
 }
 
 export const showToast = (props: Props) => {
+
   const options: ToastOptions = {
     position: "top-right",
     autoClose: 5000,
@@ -17,8 +18,9 @@ export const showToast = (props: Props) => {
     theme: "light",
     transition: Bounce,
   };
-
+  toast.info(props.message, options);
   switch (props.type) {
+    
     case "info":
       toast.info(props.message, options);
       break;

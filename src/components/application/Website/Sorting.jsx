@@ -7,7 +7,7 @@ import { IoFilter } from 'react-icons/io5'
 const Sorting = ({ limit, setLimit, sorting, setSorting, mobileFilterOpen, setMobileFilterOpen }) => {
   return (
     <div className='flex justify-between items-center  gap-2 p-2 bg-gray-100'>
-        <Button className='lg:hidden' type='button' onClick={() => setMobileFilterOpen(!mobileFilterOpen)}>
+        <Button className='lg:hidden' type='button' variant='outline' onClick={() => setMobileFilterOpen(!mobileFilterOpen)}>
             Filter
             <IoFilter/>
         </Button>
@@ -23,7 +23,7 @@ const Sorting = ({ limit, setLimit, sorting, setSorting, mobileFilterOpen, setMo
             ))}
         </ul>
         <Select value={sorting} onValueChange={(value) => (setSorting(value))}>
-            <SelectTrigger className='md:w-[180px] w-full bk-white'>
+            <SelectTrigger className='md:w-[180px] w-full text-black bg-white'>
                 <SelectValue placeholder='Default Sorting'/>
             </SelectTrigger>
             <SelectContent>

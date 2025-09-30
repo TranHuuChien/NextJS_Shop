@@ -18,19 +18,46 @@ const Filter = () => {
                             <li>
                                 <label className='flex items-center space-x-3 cursor-pointer'>
                                     <Checkbox />
-                                    <span>Giay</span>
+                                    <span>Giày</span>
                                 </label>
                             </li>
                             <li>
                                 <label className='flex items-center space-x-3 cursor-pointer'>
                                     <Checkbox />
-                                    <span>Giay</span>
+                                    <span>Quần áo</span>
                                 </label>
                             </li>
                             <li>
                                 <label className='flex items-center space-x-3 cursor-pointer'>
                                     <Checkbox />
-                                    <span>Giay</span>
+                                    <span>Túi</span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value='item-1'>
+                <AccordionTrigger className='uppercase font-semibold hover:no-underline'>Price</AccordionTrigger>
+                <AccordionContent>
+                    <div className='max-h-48 overflow-auto'>
+                        <ul>
+                            <li>
+                                <label className='flex items-center space-x-3 cursor-pointer'>
+                                    <Checkbox />
+                                    <span>1.000.000</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label className='flex items-center space-x-3 cursor-pointer'>
+                                    <Checkbox />
+                                    <span>2.000.000</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label className='flex items-center space-x-3 cursor-pointer'>
+                                    <Checkbox />
+                                    <span>3.000.000</span>
                                 </label>
                             </li>
                         </ul>

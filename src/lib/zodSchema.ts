@@ -45,5 +45,9 @@ export const zSchema = z.object({
     }
     return val;
     }, z.number().positive("Expected positive value, received negative.")),
-    description: z.string().min(3, 'Description is required.')
+    description: z.string().min(3, 'Description is required.'),
+    address: z.string().min(3, 'Address is required.'),
+    phone: z.string().min(10, 'Phone number is required.'),
+    country: z.string().min(3, 'Country is required.'),
+    
 })

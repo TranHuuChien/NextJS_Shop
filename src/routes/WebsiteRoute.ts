@@ -5,3 +5,12 @@ export const WEBSITE_RESETPASSWORD = '/auth/reset-password'
 
 export const USER_DASHBOARD = '/user/dashboard'
 export const WEBSITE_SHOP = '/shop'
+
+export const WEBSITE_CART = '/cart'
+export const WEBSITE_PRODUCT_DETAILS = (slug: string) =>  slug ? `/product/${slug}` : ''
+export const WEBSITE_CHECKOUT = '/checkout'
+
+export const USER_ACCOUNT = '/my-account'
+export const USER_PROFILE = '/my-profile'
+export const USER_ORDER = '/my-order'
+export const WEBSITE_ORDER_DETAILS = (id: number) =>  id ? `/order/${id}` : ''
