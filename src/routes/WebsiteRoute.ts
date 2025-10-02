@@ -12,5 +12,5 @@ export const WEBSITE_CHECKOUT = '/checkout'
 
 export const USER_ACCOUNT = '/my-account'
 export const USER_PROFILE = '/my-profile'
-export const USER_ORDER = '/my-order'
+export const USER_ORDER = '/my-orders'
 export const WEBSITE_ORDER_DETAILS = (id: number) =>  id ? `/order/${id}` : ''

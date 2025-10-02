@@ -22,7 +22,7 @@ const UserPanelNavigation = () => {
                 </li>
                  <li className='mb-2'>
                     <Link href={USER_PROFILE} className={`block p-3 text-sm hover:bg-[var(--primary)] hover:text-white 
-                        ${pathName.startsWith() ? 'bg-[var(--primary)] text-white' : ''}`}>Profile</Link>
+                        ${pathName.startsWith(USER_PROFILE) ? 'bg-[var(--primary)] text-white' : ''}`}>Profile</Link>
                 </li>
                  <li className='mb-2'>
                     <Link href={USER_ORDER} className={`block p-3 text-sm hover:bg-[var(--primary)] hover:text-white 
