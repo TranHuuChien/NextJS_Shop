@@ -2,7 +2,7 @@
 
 const UserLayout = () => {
     return (
-        <p>UserLayout B</p>
+        <p>UserLayout A</p>
     )
 }
 
