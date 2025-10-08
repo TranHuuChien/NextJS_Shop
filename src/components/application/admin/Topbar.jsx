@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import dynamic from "next/dynamic";
 import ThemeSwitch from './ThemeSwitch'
@@ -26,11 +27,17 @@ import logoBlack from '@public/assets/images/logo-black.png'
 import logoWhite from '@public/assets/images/logo-white.png'
 import AdminSearchMobile from './AdminSearchMobile'
 import HeaderChangeLanguages from './HeaderChangeLanguages'
+import { HiMiniBars3 } from 'react-icons/hi2';
 
 
 
-const TopBar = () => {
+const TopBar = ({ toggleDrawer, open }) => {
   //const { toggleSidebar } = useSidebar()
+  const [isMobileMenu, setIsMobileMenu] = React.useState(false)
+  const toggleDrawer1 = () => {
+    console.log(toggleDrawer)
+    //setOpen(!open)
+  }
   return (
     <div className='absolute border h-14 w-full top-0 z-30 p-2
              flex justify-between items-center bg-white dark:bg-card'>
@@ -55,6 +62,9 @@ const TopBar = () => {
           </Button> */}
           {/* <OptionMenu/> */}
           
+          <button type='button' className='lg:hidden block' onClick={toggleDrawer}>
+            <HiMiniBars3 size={25} className='text-gray-500 hover:text-primary'/>
+          </button>
         </div>
     </div>
   )

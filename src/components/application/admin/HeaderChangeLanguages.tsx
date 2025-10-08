@@ -37,9 +37,7 @@ const HeaderChangeLanguages = (props: Props) => {
     const open = Boolean(anchorEl);
     const [ imageLang, setImageLang ] = useState(imageForLang(lang))
     
-    console.log(imageLang)
     function switchImgLang(langStr: TypeLang) {
-
         dispatch(changeLang(langStr))
     }
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
