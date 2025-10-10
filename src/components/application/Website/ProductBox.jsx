@@ -3,8 +3,7 @@ import React from 'react'
 
 import imgPLaceholder from '@public/assets/images/img-placeholder.webp'
 import Link from 'next/link'
-import {WEBSITE_PRODUCT_DETAILS} from "@/routes/WebsiteRoute";
-
+import { WEBSITE_CART, WEBSITE_PRODUCT_DETAILS, WEBSITE_SHOP } from '@/routes/WebsiteRoute'
 
 const ProductBox = ({ product }) => {
   return (

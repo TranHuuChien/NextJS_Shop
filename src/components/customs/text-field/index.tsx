@@ -1,3 +1,5 @@
+'use client'
+
 import { styled, TextField, TextFieldProps } from "@mui/material"
 import { BiBorderRadius } from "react-icons/bi"
 
