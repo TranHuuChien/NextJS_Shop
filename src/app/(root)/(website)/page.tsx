@@ -8,13 +8,14 @@
 
 // export default HomePage
 
-import MainSlider from '@/components/application/Website/MainSlider'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import banner from '@public/assets/images/banner1.png'
-import ProductFeature from '@/components/Application/Website/ProductFeature'
 import advertisingBanner from '@public/assets/images/advertising-banner.png'
+import CustomTextField from "../../../components/customs/text-field/index";
+import MainSlider from "../../../components/Application/Website/MainSlider";
+import ProductFeature from "../../../components/Application/Website/ProductFeature";
 
 const Home = () => {
   return (
@@ -33,7 +34,8 @@ const Home = () => {
             </div>
           </div>
       </section>
-      <ProductFeature/>
+        <CustomTextField/>
+     <ProductFeature/>
       <div>
         <Image 
           src={advertisingBanner.src}
