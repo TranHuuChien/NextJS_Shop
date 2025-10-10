@@ -34,19 +34,19 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 const AppSidebar = ({ toggleDrawer, open }) => {
     //console.log(adminAppSidebarMenu)
     const { toggleSidebar } = useSidebar()
-    console.log(open)
+    console.log(toggleSidebar)
     return (
         <Sidebar className={``}>
 
-            <SidebarHeader className='border-b h-14'>
+            <SidebarHeader className='border-b h-14 p-0'>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <div className='flex justify-between items-center px-4'>
-                            <Image src={logoBlack.src} height={20} width={logoBlack.width} className='block dark:hidden h-[50px] w-auto' alt='logo dark' />
+                            <Image src={logoBlack.src} height={50} width={logoBlack.width} className='block dark:hidden h-[50px] w-auto' alt='logo dark' />
 
                             <Image src={logoWhite.src} height={50} width={logoWhite.width} className='hidden dark:block h-[50px] w-auto' alt='logo white' />
-                            <Button onClick={toggleSidebar} className='md:hidden' type='button' size="icon" variant="ghost" >
-                                <IoMdClose color='#7f0369ff' size={25} />
+                            <Button onClick={toggleSidebar} className='' type='button' size="icon" variant="ghost" >
+                                <IoMdClose color='#7f0369ff' size={50} className='border '/>
                             </Button>
                         </div>
                     </DropdownMenuTrigger>
