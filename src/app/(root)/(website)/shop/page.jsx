@@ -6,6 +6,8 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 import useWindowSize from '@/hooks/useWindowSize'
 import { WEBSITE_HOME, WEBSITE_SHOP } from '@/routes/WebsiteRoute'
 import React, { useState } from 'react'
+import CustomTextField from "@/components/customs/text-field";
+import CustomModal from "@/components/customs/custom-modal";
 
 
 const breadcrumb = {
@@ -19,9 +21,11 @@ const Shop = () => {
     const [sorting, setSorting] = useState('defaut_sorting')
     const [ mobileFilterOpen, setMobileFilterOpen] = useState(false)
     const size = useWindowSize()
+    const [open, setOpen] = useState(false)
     return (
         <div>
             <WebsiteBreadcrumb props={breadcrumb} />
+            <CustomModal open={open} onClose={setOpen}/>
             <section className='lg:flex lg:px-32 px-4 my-20'>
                 {size.width > 1024 ? 
                 <div className='w-72 me-4'>

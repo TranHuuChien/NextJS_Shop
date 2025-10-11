@@ -38,11 +38,24 @@ const CustomSelect = (props : TCustomSelect) => {
     const { value, label, onChange, fullWidth, placeholder, options, ...rest } = props
     return (
         <Box sx={{ width: '100%', height: '100%', position: 'relative'}}>
-
+            {((Array.isArray(value) && !value.length) || !value) && <CustomPlaceHolder>{placeholder}</CustomPlaceHolder>}
+            <StyledSelect fullWidth={fullWidth} label={label} onChange={onChange}>
+                {options?.length > 0 ?
+                    (options?.map(opt => {
+                        return (
+                            <StyledMenuItem key={opt.value} value={opt.value}>
+                                {opt.label}
+                            </StyledMenuItem>
+                        )
+                    })) :
+                    (
+                        <StyledMenuItem>Khong co data</StyledMenuItem>
+                    )}
+            </StyledSelect>
         </Box>
     )
 }
-
+export default CustomSelect;
 
 
 
