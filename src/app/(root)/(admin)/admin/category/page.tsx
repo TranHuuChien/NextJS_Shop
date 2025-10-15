@@ -25,6 +25,12 @@ interface StatusOrderChipT extends ChipProps {
     background: string
 }
 
+type TSelectedRow = {
+    row: string
+}
+
+
+
 const OrderStatusStyled = styled(Chip)<StatusOrderChipT>(({ theme, background }) => ({
     backgroundColor: background,
     color: theme.palette.common.white,
@@ -66,6 +72,7 @@ const ShowCategory = () => {
     const [loading, setLoading] = useState(false)
     const [pageSize, setPageSize] = useState(PAGE_SIZE_OPTION[0])
     const [page, setPage] = useState(1)
+    const [selectedRow, setSelectedRow] = useState<TSelectedRow[]>([])
 
     const handleCloseEdit = () => {
         setOpenEdit({
@@ -187,6 +194,7 @@ const ShowCategory = () => {
     }
 
     const PaginationComponent = () => {
+        console.log(page, pageSize)
         return (
             <CustomPagination
                 onChangePagination={handleOnchangePagination}
@@ -229,7 +237,9 @@ const ShowCategory = () => {
                 autoHeight
                 sorting={['desc', 'asc']}
                 sortingMode='server'
-                slots={}
+                slots={{
+                    pagination: PaginationComponent
+                }}
             />
 
           {/*<DataTable columns={DT_CATEGORY_COLUMN} data={data}/>*/}

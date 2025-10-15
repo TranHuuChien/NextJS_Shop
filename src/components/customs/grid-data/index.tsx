@@ -16,6 +16,10 @@ const StyleCustomGrid = styled(DataGrid)<DataGridProps> (({theme}) => ({
     ".MuiDataGrid-columnHeaderTitle": {
         textTransform: "capitalize",
         color: theme.palette.primary.main
+    },
+    ".MuiDataGrid-columnHeader": {
+        fontWeight: 500,
+
     }
 }))
 
