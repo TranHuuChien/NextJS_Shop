@@ -15,7 +15,9 @@ import banner from '@public/assets/images/banner1.png'
 import advertisingBanner from '@public/assets/images/advertising-banner.png'
 import CustomTextField from "../../../components/customs/text-field/index";
 import MainSlider from "../../../components/Application/Website/MainSlider";
-import ProductFeature from "../../../components/Application/Website/ProductFeature";
+import ProductFeature from "@/components/Application/Website/ProductFeature";
+import ConfirmationDialog from "@/components/customs/confirm-dialog/index";
+import CustomTextArea from "@/components/customs/text-area/index";
 
 const Home = () => {
   return (
@@ -34,7 +36,14 @@ const Home = () => {
             </div>
           </div>
       </section>
-        <CustomTextField/>
+
+        <CustomTextArea
+            required
+            label={'Content'}
+            placeholder={'Enter_content'}
+            minRows={3}
+            maxRows={3}
+        />
      <ProductFeature/>
       <div>
         <Image 

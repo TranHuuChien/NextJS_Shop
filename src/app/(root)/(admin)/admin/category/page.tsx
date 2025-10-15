@@ -1,54 +1,203 @@
 'use client'
 
-import BreadCrumb from '@/components/Application/Admin/BreadCrumb'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
  import { ADMIN_CATEGORY_ADD, ADMIN_CATEGORY_EDIT, ADMIN_CATEGORY_SHOW, ADMIN_DASHBOARD, ADMIN_TRASH } from '@/routes/AdminPanelRoute'
 import Link from 'next/link'
 import { FiPlus } from 'react-icons/fi'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-//import DatatableWrapper from '@/components/Application/Admin/DatatableWrapper'
-import { DT_CATEGORY_COLUMN } from '@/lib/column'
-import { columnConfig } from '@/lib/helperFunction'
-// import DeleteAction from '@/components/Application/Admin/DeleteAction'
-// import EditAction from '@/components/Application/Admin/EditAction'
-import { DataTable } from '@/components/application/admin/DataTable'
-import { CATEGORY_TYPE } from '@/lib/column'
+
+import { GridColDef, GridSortModel } from '@mui/x-data-grid'
+import CustomDataGrid from "@/components/customs/grid-data/index";
+import {Card, CardContent, CardHeader} from "@/components/ui/card";
+import {Button} from "@/components/ui/button";
+import BreadCrumb from "@/components/Application/Admin/BreadCrumb";
+import {AvatarGroup, Chip, ChipProps, Typography} from "@mui/material";
+import {styled, useTheme} from "@mui/material/styles";
+import GridEdit from "@/components/customs/grid-edit/index";
+import GridDelete from "@/components/customs/grid-delete/index";
+import CustomPagination from "@/components/customs/custom-pagination/index";
 
 const breadcrumbData = [
   { href: ADMIN_DASHBOARD, label: "Home" },
   { href: ADMIN_CATEGORY_SHOW, label: 'Category' }
 ]
 
- async function getData(): Promise<CATEGORY_TYPE[]> {
-  // Fetch data from your API here.
-  return [
-    {
-      name: "The Thao",
-      slug: "the-thao",
-      createDate: '10-12-2025'
-    },
-    // ...
-  ]
+interface StatusOrderChipT extends ChipProps {
+    background: string
 }
 
+const OrderStatusStyled = styled(Chip)<StatusOrderChipT>(({ theme, background }) => ({
+    backgroundColor: background,
+    color: theme.palette.common.white,
+    fontSize: '14px',
+    padding: '8px 4px',
+    fontWeight: 400
+}))
+
+
+//  async function getData(): Promise<CATEGORY_TYPE[]> {
+//   // Fetch data from your API here.
+//   return [
+//     {
+//       name: "The Thao",
+//       slug: "the-thao",
+//       createDate: '10-12-2025'
+//     },
+//     // ...
+//   ]
+// }
+
+export const PAGE_SIZE_OPTION = [10, 20, 30, 40, 50]
+
 const ShowCategory = () => {
+    //** State
+    const [openEdit, setOpenEdit] = useState({
+        open: false,
+        id: ''
+    })
+    const [openDelete, setOpenDetele] = useState({
+        open: false,
+        id: ''
+    })
 
-  // const columns = useMemo(() => {
-  //   return columnConfig(DT_CATEGORY_COLUMN)
-  // }, [])
+    const [sortBy, setSortBy] = useState("createdAt desc")
+    const [searchBy, setSearchBy] =useState("")
+    const [statusSelected, setStatusSelected] = useState<string[]>([])
 
-  // const action = useCallback((row, deleteType, handleDelete) => {
-  //   let actionMenu = []
-  //   action.push(<EditAction key='edit' href={ADMIN_CATEGORY_EDIT(row.original._id)}/>)
-  //   action.push(<DeleteAction key='delete' handleDelete={handleDelete} row={row} deleteType={deleteType}/>)
-  //   return actionMenu
-  // }, [])
+    const [loading, setLoading] = useState(false)
+    const [pageSize, setPageSize] = useState(PAGE_SIZE_OPTION[0])
+    const [page, setPage] = useState(1)
 
-  const [data, setData] = useState<CATEGORY_TYPE[]>([]);
-  useEffect(() => {
-    getData().then(setData)
-  }, [])
+    const handleCloseEdit = () => {
+        setOpenEdit({
+            open: false,
+            id: ''
+        })
+    }
+    const handleCloseDelete = () => {
+        setOpenDetele({
+            open: false,
+            id: ""
+        })
+    }
+
+    //** Theme
+    const theme = useTheme()
+    const STATUS_ORDER_PRODUCT_STYLE = {
+        0: {
+            label: "Wait_payment",
+            background: theme.palette.warning.main
+        },
+        1: {
+            label: "Wait_delivery",
+            background: theme.palette.secondary.main
+        },
+        2: {
+            label: "Done_order",
+            background: theme.palette.success.main
+        },
+        3: {
+            label: "Cancel_order",
+            background: theme.palette.error.main
+        }
+    }
+
+    const columns: GridColDef[] = [
+        {
+            field: 'items',
+            headerName: "Product Item",
+            flex: 1,
+            minWidth: 200,
+            // renderCell: params => {
+            //     const { row } = params
+            //
+            //     return (
+            //         <AvatarGroup max={1}>
+            //             {row.orderItems?.map((item: TItemProductMe) => {
+            //                 return (
+            //                     <Avatar key={item?.product?._id} alt={item?.product?.slug} src={item?.image} />
+            //                 )
+            //             })}
+            //         </AvatarGroup>
+            //     )
+            // }
+        },
+        {
+            field: "category_name",
+            headerName: "Category Name",
+            flex: 1,
+            minWidth: 200,
+            maxWidth: 200,
+            renderCell: params => {
+                const { row } = params
+                return <Typography></Typography>
+            }
+        },
+        {
+            field: "status",
+            headerName: "Status",
+            minWidth: 150,
+            maxWidth: 150,
+            renderCell: params => {
+                const { row } = params
+                return (
+                    <>
+                        {<OrderStatusStyled background={(STATUS_ORDER_PRODUCT_STYLE as any)[row.status]?.background} label={(STATUS_ORDER_PRODUCT_STYLE as any)[row.status]?.label} />}
+                    </>
+                )
+
+            }
+        },
+        {
+            field: "action",
+            headerName: "Action",
+            minWidth: 180,
+            sortable: false,
+            align: "left",
+            renderCell: params => {
+                const { row } = params
+                return (
+                    <>
+                        <GridEdit
+                            disabled={true}
+                            onClick={() => {
+                                setOpenEdit({
+                                    open: true,
+                                    id: String(params.id)
+                                })
+                            }}
+                        />
+                        <GridDelete
+                            disabled={true}
+                            onClick={() => {
+                               setOpenDetele({
+                                   open: true,
+                                   id: String(params.id)
+                               })
+                            }}
+                        />
+                    </>
+                )
+            }
+        }
+    ]
+
+    const handleOnchangePagination = (page: number, pageSize: number) => {
+        setPage(page);
+        setPageSize(pageSize);
+    }
+
+    const PaginationComponent = () => {
+        return (
+            <CustomPagination
+                onChangePagination={handleOnchangePagination}
+                pageSizeOptions={PAGE_SIZE_OPTION}
+                pageSize={pageSize}
+                page={page}
+                rowLength={50}
+            />
+        )
+    }
+
   return (
     <div>
       <BreadCrumb breadcrumbData={breadcrumbData} />
@@ -75,8 +224,15 @@ const ShowCategory = () => {
             trashView={`${ADMIN_TRASH}?trashof=category`}
             createAction={action}
           /> */}
+            <CustomDataGrid
+                columns={columns}
+                autoHeight
+                sorting={['desc', 'asc']}
+                sortingMode='server'
+                slots={}
+            />
 
-          <DataTable columns={DT_CATEGORY_COLUMN} data={data}/>
+          {/*<DataTable columns={DT_CATEGORY_COLUMN} data={data}/>*/}
         </CardContent>
       </Card> 
     </div>

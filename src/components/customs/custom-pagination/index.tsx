@@ -76,3 +76,4 @@ const CustomPagination = React.forwardRef((props: PaginationProps, ref: Ref<any>
 })
 //// eslint-disable-next-line react/display-name
 CustomPagination.displayName= 'CustomPagination' // tranh eslint an danh
+export default CustomPagination;

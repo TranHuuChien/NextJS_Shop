@@ -1,6 +1,7 @@
 // ** Type Imports
-import { Palette } from '@mui/material'
-import { Skin } from 'src/types/layouts'
+//import { Palette } from '@mui/material'
+import {Skin} from "../../types/layout";
+import {Palette} from '@mui/material/styles'
 
 const DefaultPalette = (mode: Palette['mode'], skin: Skin): Palette => {
   // ** Vars

@@ -1,6 +1,5 @@
 'use client'
 
-
 import {styled} from "@mui/material/styles";
 import { DataGrid, DataGridProps, GridColDef } from '@mui/x-data-grid'
 import React, {Ref} from "react";
@@ -19,6 +18,8 @@ const StyleCustomGrid = styled(DataGrid)<DataGridProps> (({theme}) => ({
         color: theme.palette.primary.main
     }
 }))
+
+
 
 const CustomDataGrid = React.forwardRef((props: DataGridProps, ref: Ref<any>) => {
     return (
