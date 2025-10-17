@@ -5,9 +5,15 @@ import { authSlice } from './reducer/authSlice';
 //import langReducer from './reducer/langReducer';
 
 import { combineReducers } from '@reduxjs/toolkit'
+import {langSlice} from "@/store/reducer/langSlice";
+import {loadingSlice} from "@/store/reducer/loadingSlice";
+import {themeSlice} from "@/store/reducer/themeSlice";
 
 const rootReducer = combineReducers({
-  auth: authSlice.reducer,
+    user: authSlice.reducer,
+    lang: langSlice.reducer,
+    loading: loadingSlice.reducer,
+    theme: themeSlice.reducer
 })
 
 const persistConfig = {

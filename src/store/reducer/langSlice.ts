@@ -38,14 +38,16 @@ export const langSlice = createSlice({
     initialState,
     reducers: {
         changeLang: (state, action: {payload: TypeLang}) => {
+            console.log(action.payload)
             state.lang = action.payload;
-            localStorage.setItem('lang', action.payload);
+            //localStorage.setItem('lang', action.payload);
             switch(action.payload) {
                 case 'vi':
                     state.dataLang = vi
-                case 'kh':
-                  state.dataLang = kh;
-                  break;
+                    break;
+                // case 'kh':
+                //   state.dataLang = kh;
+                //   break;
                 default:
                     state.dataLang = en;
                     break;
@@ -53,5 +55,5 @@ export const langSlice = createSlice({
         },
     }
 })
-//export const { changeLang } = langSlice.actions 
-//export default langSlice.reducer
+export const { changeLang } = langSlice.actions
+export default langSlice.reducer
