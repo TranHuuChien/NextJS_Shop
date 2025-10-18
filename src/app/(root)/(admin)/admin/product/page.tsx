@@ -9,7 +9,7 @@ import {formatNumberToLocal, formatDate, hexToRGBA} from "@/lib/helperFunction";
 import GridEdit from "@/components/customs/grid-edit/index";
 import GridDelete from "@/components/customs/grid-delete/index";
 import Spinner from "@/components/customs/spinner/index";
-import ConfirmationDialog from "@/components/customs/confirm-dialog/index";
+import ConfirmationDialog from "@/components/customs/confirm-dialog";
 import CustomDataGrid from "@/components/customs/grid-data/index";
 import {TableHeader} from "@/components/ui/table";
 import CustomPagination from "@/components/customs/custom-pagination/index";

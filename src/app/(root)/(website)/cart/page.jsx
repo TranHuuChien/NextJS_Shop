@@ -30,7 +30,6 @@ const CartPage = () => {
   return (
     <div>
       <WebsiteBreadcrumb props={breadcrumb} />
-      <ItemCartProduct/>
       {cart.length === 0 ?
         <div className='w-screen h-[500px] flex justify-center items-center py-32'>
           <div className='text-center'>

@@ -13,7 +13,7 @@ const CustomModal = styled(Modal)<ModalProps>(({ theme }) => ({
         height: '100%',
         zIndex: 2000,
         '.MuiModal-backdrop': {
-            backgroundColor: `rgba(${theme.palette.customColors.main}, 0.4)`
+            //backgroundColor: `rgba(${theme.palette.customColors.main}, 0.4)`
         }
     }
 }))

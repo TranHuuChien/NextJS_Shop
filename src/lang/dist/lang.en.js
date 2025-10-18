@@ -137,14 +137,14 @@ exports.en = Object.freeze({
         title: 'Home',
         app: {
             h1: 'ALTEK - a provider of professional software solutions and products for finance and business management',
-            h5: ' We constantly strive to provide our customers with pre-eminent products integrated with the latest technologies.'
+            h5: ' We constantly strive to provide our roles with pre-eminent products integrated with the latest technologies.'
         },
-        introduce: 'ALTEK always appreciates the fundamental value for development, which is the association is cooperating with customers. And without any difficulty What can prevent us from delivering the right utility values? in accordance with the wishes and interests of the customer. We believe I believe that with the united, strong ALTEK team and the support of Dear customers, ALTEK will surely achieve a lot of success more.'
+        introduce: 'ALTEK always appreciates the fundamental value for development, which is the association is cooperating with roles. And without any difficulty What can prevent us from delivering the right utility values? in accordance with the wishes and interests of the customer. We believe I believe that with the united, strong ALTEK team and the support of Dear roles, ALTEK will surely achieve a lot of success more.'
     },
     header: {
         Abouts: {
             title: 'Where Creativity ALTEK',
-            textTitle: 'With the mission of developing outstanding technological products for customers,ALTEK strengthens its position with highly qualified staff combined and creativeand breakthrough thinking, producing optimal solutions.'
+            textTitle: 'With the mission of developing outstanding technological products for roles,ALTEK strengthens its position with highly qualified staff combined and creativeand breakthrough thinking, producing optimal solutions.'
         },
         Solutions: {
             title: 'Quick digitization with pre-designed solutions',
@@ -160,7 +160,7 @@ exports.en = Object.freeze({
         },
         Customers: {
             title: 'Customer – Where brings opporty ALTEK for business corporation',
-            textTitle: 'With the support of customers, ALTEK has continuously developed and grown over the years'
+            textTitle: 'With the support of roles, ALTEK has continuously developed and grown over the years'
         },
         News: {
             title: 'Shared corner',
@@ -252,7 +252,7 @@ exports.en = Object.freeze({
         },
         Maintenance: {
             titleLift: 'System maintenance',
-            titleRight1: 'Assist customers in maintaining and upgrading software systems based on the software being used in the customers environment.'
+            titleRight1: 'Assist roles in maintaining and upgrading software systems based on the software being used in the roles environment.'
         },
         Test: {
             titleLift: 'Software Testing',
@@ -276,20 +276,20 @@ exports.en = Object.freeze({
         aboutValues6: 'Support for enterprise management system',
         aboutValuesText6: ' New development and upgrading of tools to support enterprises in business and internal management',
         aboutValues7: 'CUSTOMERS AND PARTNER',
-        aboutValuesText7: 'ALTEK was founded with the mission of serving customers, with the view of being part of customers, accompanying customers to develop the best services, offering the most useful solutions. ALTEK chooses for itself the path of quality and suitability for each customer by participating from the very first stage in consulting and building problems with customers. Louis Dang, ALTEK',
+        aboutValuesText7: 'ALTEK was founded with the mission of serving roles, with the view of being part of roles, accompanying roles to develop the best services, offering the most useful solutions. ALTEK chooses for itself the path of quality and suitability for each customer by participating from the very first stage in consulting and building problems with roles. Louis Dang, ALTEK',
         brief: 'ALTEK in brief',
-        briefText: 'ALTEK was founded with the mission of serving customers, with the view of being part of customers, accompanying customers to develop the best services, offering the most useful solutions. ALTEK chooses for itself the path of quality and suitability for each customer by participating from the very first stage in consulting and building problems with customers'
+        briefText: 'ALTEK was founded with the mission of serving roles, with the view of being part of roles, accompanying roles to develop the best services, offering the most useful solutions. ALTEK chooses for itself the path of quality and suitability for each customer by participating from the very first stage in consulting and building problems with roles'
     },
     Solutions: {
         solutionsValues: 'Our solution',
         solutionsValues1: 'The foundation for the financial ecosystem',
         solutionsValuesText1: 'Built in Microservices architecture, including independent components such as Core Wallet, Channel Manager, Partner Management... Clear accounting, multi-object management, highly flexible configuration, support the full operational support of a financial platform.',
         solutionsValues2: 'Solution for Mobile App',
-        solutionsValuesText2: 'ALTEK provides a Full Mobile solution including back-end and Mobile App, easy to manage, optimal experience for customers',
+        solutionsValuesText2: 'ALTEK provides a Full Mobile solution including back-end and Mobile App, easy to manage, optimal experience for roles',
         solutionsValues3: 'Governance risk',
         solutionsValuesText3: 'ALTEK solution supports monitoring, identification and handling of unusual behavior, helping to prevent money laundering, terrorist financing, profiteering and financial hardship.',
         solutionsValues4: ' Loyalty',
-        solutionsValuesText4: 'ALTEK Loyalty Program solution helps attract new customers, retain old customers and increase the attention of unknown customers',
+        solutionsValuesText4: 'ALTEK Loyalty Program solution helps attract new roles, retain old roles and increase the attention of unknown roles',
         solutionsValues5: 'Manage promotions',
         solutionsValuesText5: 'A versatile and comprehensive solution to drive sales for merchants in the ecosystem, enhancing the customer experience.'
     }
