@@ -9,7 +9,20 @@ import { RiCoupon2Line } from 'react-icons/ri'
 import { title } from 'process'
 import { url } from 'inspector'
 import { icons } from 'lucide-react'
-import { ADMIN_CATEGORY_ADD, ADMIN_CATEGORY_DASHBOARD, ADMIN_CATEGORY_EDIT, ADMIN_CATEGORY_SHOW, ADMIN_COUPON_ADD, ADMIN_COUPON_SHOW, ADMIN_DASHBOARD, ADMIN_MEDIA_SHOW, ADMIN_PRODUCT_ADD, ADMIN_PRODUCT_EDIT, ADMIN_PRODUCT_SHOW } from '@/routes/AdminPanelRoute'
+import {
+    ADMIN_CATEGORY_ADD,
+    ADMIN_CATEGORY_DASHBOARD,
+    ADMIN_CATEGORY_EDIT,
+    ADMIN_CATEGORY_SHOW,
+    ADMIN_COUPON_ADD,
+    ADMIN_COUPON_SHOW, ADMIN_CUSTOMER_DASHBOARD,
+    ADMIN_CUSTOMER_SHOW,
+    ADMIN_DASHBOARD,
+    ADMIN_MEDIA_SHOW,
+    ADMIN_PRODUCT_ADD,
+    ADMIN_PRODUCT_EDIT,
+    ADMIN_PRODUCT_SHOW
+} from '@/routes/AdminPanelRoute'
 
 export const adminAppSidebarMenu = [
     {
@@ -84,8 +97,14 @@ export const adminAppSidebarMenu = [
     }, 
     {
         title: "Customers",
-        url: '#',
+        url: ADMIN_CUSTOMER_DASHBOARD,
         icon: LuUserRound,
+        submenu: [
+            {
+                title: "Manage Customer",
+                url: ADMIN_CUSTOMER_SHOW
+            }
+        ]
     },
     {
         title: "Rating & Review",

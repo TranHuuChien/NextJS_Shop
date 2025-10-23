@@ -21,5 +21,9 @@ export const ADMIN_COUPON_ADD = '/admin/coupon/add'
 export const ADMIN_COUPON_SHOW = '/admin/coupon'
 export const ADMIN_COUPON_EDIT = (id: number) => id ? `/admin/coupon/edit/${id}` : ''
 
+//Customer
+export const ADMIN_CUSTOMER_DASHBOARD = '/admin/customers'
+export const ADMIN_CUSTOMER_SHOW = '/admin/customers'
+
 //Trash route
 export const ADMIN_TRASH = '/admin/trash'

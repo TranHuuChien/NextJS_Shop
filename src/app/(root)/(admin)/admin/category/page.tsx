@@ -6,7 +6,7 @@ import { FiPlus } from 'react-icons/fi'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { GridColDef, GridSortModel } from '@mui/x-data-grid'
-import CustomDataGrid from "@/components/customs/grid-data/index";
+import CustomDataGrid from "@/components/customs/data-grid/index";
 import {Card, CardContent, CardHeader} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
 import BreadCrumb from "@/components/Application/Admin/BreadCrumb";
@@ -24,6 +24,12 @@ const breadcrumbData = [
 interface StatusOrderChipT extends ChipProps {
     background: string
 }
+
+type TSelectedRow = {
+    row: string
+}
+
+
 
 const OrderStatusStyled = styled(Chip)<StatusOrderChipT>(({ theme, background }) => ({
     backgroundColor: background,
@@ -66,6 +72,7 @@ const ShowCategory = () => {
     const [loading, setLoading] = useState(false)
     const [pageSize, setPageSize] = useState(PAGE_SIZE_OPTION[0])
     const [page, setPage] = useState(1)
+    const [selectedRow, setSelectedRow] = useState<TSelectedRow[]>([])
 
     const handleCloseEdit = () => {
         setOpenEdit({
@@ -187,6 +194,7 @@ const ShowCategory = () => {
     }
 
     const PaginationComponent = () => {
+        console.log(page, pageSize)
         return (
             <CustomPagination
                 onChangePagination={handleOnchangePagination}
@@ -229,7 +237,9 @@ const ShowCategory = () => {
                 autoHeight
                 sorting={['desc', 'asc']}
                 sortingMode='server'
-                slots={}
+                slots={{
+                    pagination: PaginationComponent
+                }}
             />
 
           {/*<DataTable columns={DT_CATEGORY_COLUMN} data={data}/>*/}

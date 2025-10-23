@@ -32,9 +32,8 @@ import IconifyIcon from '@/components/customs/icons';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 
 const AppSidebar = ({ toggleDrawer, open }) => {
-    //console.log(adminAppSidebarMenu)
     const { toggleSidebar } = useSidebar()
-    console.log(toggleSidebar)
+    //console.log(toggleSidebar)
     return (
         <Sidebar className={``}>
 

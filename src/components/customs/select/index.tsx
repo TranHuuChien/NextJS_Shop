@@ -1,7 +1,8 @@
+'use client'
 import {Box, InputLabel, InputLabelProps, MenuItem, MenuItemProps, Select, SelectProps, styled} from "@mui/material";
 
 interface TCustomSelect extends SelectProps {
-    option: { label: string; value: string }[]
+    options: { label: string; value: string }[]
 }
 
 const StyledSelect = styled(Select)<SelectProps>(({theme}) => ({
@@ -36,6 +37,7 @@ const StyledMenuItem = styled(MenuItem)<MenuItemProps>(({theme}) => ({}))
 
 const CustomSelect = (props : TCustomSelect) => {
     const { value, label, onChange, fullWidth, placeholder, options, ...rest } = props
+    console.log(options)
     return (
         <Box sx={{ width: '100%', height: '100%', position: 'relative'}}>
             {((Array.isArray(value) && !value.length) || !value) && <CustomPlaceHolder>{placeholder}</CustomPlaceHolder>}

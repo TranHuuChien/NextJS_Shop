@@ -32,7 +32,7 @@ const CustomPagination = React.forwardRef((props: PaginationProps, ref: Ref<any>
                         <Box>
                             <span>Đang hiển thị </span>
                             <span style={{ fontWeight: 'bold' }}>
-                                {page === 1 ? page : 1 + pageSize}
+                                {page === 1 ? page : 1 + pageSize * (page - 1)}
                                 {' - '}
                             </span>
                             <span style={{ fontWeight: 'bold' }}>{page * pageSize < rowLength ? page * pageSize : rowLength} </span>
