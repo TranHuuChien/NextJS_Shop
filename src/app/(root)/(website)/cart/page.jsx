@@ -8,6 +8,7 @@ import React from 'react'
 import imgPLaceholder from '@public/assets/images/img-placeholder.webp'
 import { HiMinus, HiPlus } from 'react-icons/hi2'
 import ItemCartProduct from "./ItemCartProduct";
+import {InputButton} from "@/components/customs/input/InputButton";
 
 const breadcrumb = {
   title: 'Cart',
@@ -30,7 +31,7 @@ const CartPage = () => {
   return (
     <div>
       <WebsiteBreadcrumb props={breadcrumb} />
-      <ItemCartProduct/>
+      <InputButton type="search" title={"Nhan vao day"}/>
       {cart.length === 0 ?
         <div className='w-screen h-[500px] flex justify-center items-center py-32'>
           <div className='text-center'>

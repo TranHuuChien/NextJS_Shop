@@ -10,7 +10,7 @@ import GridEdit from "@/components/customs/grid-edit/index";
 import GridDelete from "@/components/customs/grid-delete/index";
 import Spinner from "@/components/customs/spinner/index";
 import ConfirmationDialog from "@/components/customs/confirm-dialog/index";
-import CustomDataGrid from "@/components/customs/grid-data/index";
+import CustomDataGrid from "@/components/customs/data-grid/index";
 import {TableHeader} from "@/components/ui/table";
 import CustomPagination from "@/components/customs/custom-pagination/index";
 import CustomSelect from "@/components/customs/select/index";

@@ -6,7 +6,7 @@ import BreadCrumb from "@/components/application/admin/BreadCrumb";
 import {Card, CardContent, CardHeader} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
 import {FiPlus} from "react-icons/fi";
-import CustomDataGrid from "@/components/customs/grid-data";
+import CustomDataGrid from "@/components/customs/data-grid";
 import Link from 'next/link'
 
 const breadcrumbData = [

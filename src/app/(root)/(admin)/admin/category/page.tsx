@@ -6,7 +6,7 @@ import { FiPlus } from 'react-icons/fi'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { GridColDef, GridSortModel } from '@mui/x-data-grid'
-import CustomDataGrid from "@/components/customs/grid-data/index";
+import CustomDataGrid from "@/components/customs/data-grid/index";
 import {Card, CardContent, CardHeader} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
 import BreadCrumb from "@/components/Application/Admin/BreadCrumb";
