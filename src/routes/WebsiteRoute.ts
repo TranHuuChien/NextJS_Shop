@@ -14,3 +14,5 @@ export const USER_ACCOUNT = '/account'
 export const USER_PROFILE = '/my-profile'
 export const USER_ORDER = '/my-orders'
 export const WEBSITE_ORDER_DETAILS = (id: number) =>  id ? `/order/${id}` : ''
+
+export const NOTIFICATION_DETAIL = (context: string) => context ? `/notification/${context}` : '';

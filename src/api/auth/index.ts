@@ -1,5 +1,5 @@
 import { API_ENDPOINT } from "@/lib/UrlConstant"
-import { TLoginAuth, TRegisterAuth } from "@/types"
+import { TLoginAuth, TRegisterAuth } from "@/types/auth"
 import axios from "axios"
 
 

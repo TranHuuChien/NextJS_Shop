@@ -1,12 +1,11 @@
 import { toast, Bounce, ToastOptions } from "react-toastify";
 
 interface Props {
-  type: "info" | "success" | "error" | "warn"; // thêm type để chặt chẽ hơn
+  type: "info" | "success" | "error" | "warn"; // chặt chẽ
   message: string;
 }
 
-export const showToast = (props: Props) => {
-
+export const showToast = ({ type, message }: Props) => {
   const options: ToastOptions = {
     position: "top-right",
     autoClose: 5000,
@@ -18,23 +17,22 @@ export const showToast = (props: Props) => {
     theme: "light",
     transition: Bounce,
   };
-  toast.info(props.message, options);
-  switch (props.type) {
-    
-    case "info":
-      toast.info(props.message, options);
-      break;
+
+  switch (type) {
     case "success":
-      toast.success(props.message, options);
+      toast.success(message, options);
       break;
     case "error":
-      toast.error(props.message, options);
+      toast.error(message, options);
+      break;
+    case "info":
+      toast.info(message, options);
       break;
     case "warn":
-      toast.warn(props.message, options);
+      toast.warn(message, options);
       break;
     default:
-      toast(props.message, options);
+      toast(message, options);
       break;
   }
 };
