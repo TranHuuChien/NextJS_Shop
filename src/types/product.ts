@@ -12,6 +12,31 @@ export const OBJECT_STATUS_PRODUCT = () => {
     }
 }
 
+export type TProduct = {
+    _id: string
+    averageRating: number
+    createdAt: Date | null
+    image: string
+    price: number
+    name: string
+    slug: string
+    totalLike: number
+    countInStock: number
+    discountEndDate: Date | null
+    discountStartDate: Date | null
+    totalReviews: number
+    discount: number
+    sold: number
+    description:string
+    location: {
+        name: string
+        _id: string
+    }
+    likedBy: string[]
+    views: number
+    uniqueViews: string[]
+}
+
 export type ItemOrderProduct = {
     name: string,
     amount: number,

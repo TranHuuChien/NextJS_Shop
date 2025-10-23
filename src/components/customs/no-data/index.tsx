@@ -4,10 +4,11 @@ import Image from 'next/image'
 
 //** Mui Imports
 import Box from "@mui/material/Box";
-import Typography from "@mui/material";
+//import Typography from "@mui/material";
+import Typography from '@mui/material/Typography'
 
 //** Image Import
-import Nodata from '../../../public/no-data.svg'
+import Nodata from '@public/no-data.svg'
 
 type TProps = {
     widthImage?: string,

@@ -16,7 +16,7 @@ import advertisingBanner from '@public/assets/images/advertising-banner.png'
 import CustomTextField from "../../../components/customs/text-field/index";
 import MainSlider from "../../../components/Application/Website/MainSlider";
 import ProductFeature from "@/components/Application/Website/ProductFeature";
-import ConfirmationDialog from "@/components/customs/confirm-dialog/index";
+import ConfirmationDialog from "@/components/customs/confirm-dialog";
 import CustomTextArea from "@/components/customs/text-area/index";
 
 const Home = () => {

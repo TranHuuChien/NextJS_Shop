@@ -1,7 +1,7 @@
 'use client'
 import React, { Suspense } from 'react';
-import { persistor } from '@/store/store';
-import { store } from '@/redux';
+import { persistor, store } from '@/store/store';
+// import { store } from '@/redux';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import Loading from './Loading'

@@ -28,6 +28,8 @@ import logoWhite from '@public/assets/images/logo-white.png'
 import AdminSearchMobile from './AdminSearchMobile'
 import HeaderChangeLanguages from './HeaderChangeLanguages'
 import { HiMiniBars3 } from 'react-icons/hi2';
+import CartProduct from "@/layouts/CartProductLayout";
+import NotificationDropdown from "@/layouts/DropdownNotification";
 
 
 
@@ -61,7 +63,8 @@ const TopBar = ({ toggleDrawer, open }) => {
             <RiMenu4Fill/>
           </Button> */}
           {/* <OptionMenu/> */}
-          
+          <CartProduct/>
+          <NotificationDropdown/>
           <button type='button' className='lg:hidden block' onClick={toggleDrawer}>
             <HiMiniBars3 size={25} className='text-gray-500 hover:text-primary'/>
           </button>

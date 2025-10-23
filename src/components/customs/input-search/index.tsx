@@ -4,7 +4,7 @@ import { styled} from "@mui/material/styles";
 import {InputBase} from "@mui/material";
 //** React Import
 import {useEffect, useState} from "react";
-import {Icon} from "lucide-react";
+import IconifyIcon from "@/components/customs/icons";
 
 interface TInputSearch {
     value: string,
@@ -58,7 +58,7 @@ const InputSearch = (props: TInputSearch) => {
     return (
         <Search>
             <SearchIconWrapper>
-                <Icon icon='material-symbols-light:search' />
+                <IconifyIcon icon='material-symbols-light:search' />
             </SearchIconWrapper>
             <StyledInputBase value={value} placeholder={placeholder}
                 inputProps={{ 'aria-label': 'search' }}
@@ -72,10 +72,9 @@ const InputSearch = (props: TInputSearch) => {
                     if(!e.target.value) {
                        onChange(e.target.value)
                     }
-                }}
-            >
-
+                }}>
             </StyledInputBase>
         </Search>
     )
 }
+export default InputSearch

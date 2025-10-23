@@ -37,9 +37,9 @@ const OrderPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {/* {dashboardData && dashboardData?.data?.recentOrders?.map((order, index) => (
-                                        <tr key={index}>
-                                            <td className='text-start text-sm text-gray-500 p-2 font-bold'>{index + 1}</td>
+                                    {/* {dashboardData && dashboardData?.data?.recentOrders?.map((order, index.tsx) => (
+                                        <tr key={index.tsx}>
+                                            <td className='text-start text-sm text-gray-500 p-2 font-bold'>{index.tsx + 1}</td>
                                             <td className='text-start text-sm text-gray-500 p-2 font-bold'>
                                                 <Link href={WEBSITE_ORDER_DETAILS(order?.order_id)} 
                                                     className='underline hover:text-blue-500 underlioff2'

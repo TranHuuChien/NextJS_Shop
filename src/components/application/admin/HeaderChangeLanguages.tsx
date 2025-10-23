@@ -2,7 +2,7 @@
 import { TypeLang } from '@/module'
 import { langSlice } from '@/store/reducer/langSlice'
 import { langSelector } from '@/store/selector/langSelector'
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -37,9 +37,14 @@ const HeaderChangeLanguages = (props: Props) => {
     const open = Boolean(anchorEl);
     const [ imageLang, setImageLang ] = useState(imageForLang(lang))
     
-    function switchImgLang(langStr: TypeLang) {
+    function switchImgLang(langStr: string) {
+        setImageLang(imageForLang(langStr))
+        //console.log(langStr)
         dispatch(changeLang(langStr))
+        console.log(dataLang)
     }
+
+
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget)
     }
@@ -59,7 +64,7 @@ const HeaderChangeLanguages = (props: Props) => {
                             aria-haspopup='true'
                             aria-expanded={open ? 'true' : undefined}
                         >
-                            <Image src={imageLang} alt='avatar'></Image>
+                            <Image src={imageLang} alt='avatar' width="30" height="30"></Image>
                         </IconButton>
                     </Tooltip>
                 </Box>
@@ -101,14 +106,14 @@ const HeaderChangeLanguages = (props: Props) => {
                     <MenuItem onClick={() => switchImgLang('en')}>
                         <ListItemIcon>
                             {/* <Avatar src={imgEN} /> */}
-                            <Image src={imgEN} alt='English'/>
+                            <Image src="/assets/images_copy/en.svg" alt='English' width="30" height="30"/>
                         </ListItemIcon>
                         {dataLang.lang.english}
                     </MenuItem>
                     <MenuItem onClick={() => switchImgLang('vi')}>
                         <ListItemIcon>
                             {/* <Avatar src={imgVN} /> */}
-                            <Image src={imgVN} alt='Vietnamese'/>
+                            <Image src="/assets/images_copy/vn.svg" alt='Vietnamese' width="30" height="30"/>
                         </ListItemIcon>
                         {dataLang.lang.vietnam}
                     </MenuItem>

@@ -1,0 +1,11 @@
+
+
+export type ItemOrderProduct = {
+    name: string,
+    amount: number,
+    image: string,
+    price: number,
+    discount: number,
+    product: string,
+    slug: string
+}
