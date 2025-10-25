@@ -71,7 +71,7 @@ const NotificationItem = (props: NotificationProps) => {
                     )}
                     <>
                         <IconButton onClick={(event: MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget)}>
-                            <Icon icon="pepicons-pencil:dots-y"></Icon>
+                            <IconifyIcon icon="pepicons-pencil:dots-y"></IconifyIcon>
                         </IconButton>
                         <Menu
                             keepMounted
@@ -98,7 +98,7 @@ const NotificationItem = (props: NotificationProps) => {
                                 sx={{ '& svg': { mr: 2 } }}
                                 onClick={handleDeleteNotification}
                             >
-                                <Icon icon='mdi:delete-outline' fontSize={20} />
+                                <IconifyIcon icon='mdi:delete-outline' fontSize={20} />
                                 {'Delete'}
                             </MenuItem>
                         </Menu>

@@ -25,6 +25,7 @@ export const InputButton = (props : Props) => {
         disabled = false,
         className
     } = props;
+
     function handleRenderIcon() {
         switch (type) {
             case 'search':
@@ -38,7 +39,7 @@ export const InputButton = (props : Props) => {
         }
     }
     return (
-        <button onClick={() => {}}
+        <button className={`flex gap-2 bg-[var(--primary)] rounded-md p-2 text-white`} onClick={onClick}
                 type={type}
                 disabled={disabled}>
             {handleRenderIcon()} {title}

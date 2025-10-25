@@ -21,7 +21,7 @@ interface StyleDatePickerProps extends BoxProps {
 const StyleDatePicker = styled(Box)<StyleDatePickerProps>(({ theme, error }) => ({
     borderRadius: 8,
     backgroundColor: 'transparent !important',
-    border: error ? `1px solid ${theme.palette.error.main}` : `1px solid rgba(${theme.palette.customColors.main}, 0.2)`,
+    //border: error ? `1px solid ${theme.palette.error.main}` : `1px solid rgba(${theme.palette.customColors.main}, 0.2)`,
     height: '38px',
     padding: '8px',
     position: 'relative',
@@ -32,20 +32,20 @@ const StyleDatePicker = styled(Box)<StyleDatePickerProps>(({ theme, error }) => 
         },
     },
     '.react-datepicker__header ': {
-        backgroundColor: theme.palette.customColors.bodyBg,
-        '.react-datepicker__day-name': {
-            color: `rgba(${theme.palette.customColors.main}, 0.8)`
-        },
-        '.react-datepicker__current-month': {
-            color: `rgba(${theme.palette.customColors.main}, 1)`
-        }
+        // backgroundColor: theme.palette.customColors.bodyBg,
+        // '.react-datepicker__day-name': {
+        //     color: `rgba(${theme.palette.customColors.main}, 0.8)`
+        // },
+        // '.react-datepicker__current-month': {
+        //     color: `rgba(${theme.palette.customColors.main}, 1)`
+        // }
     },
     '.react-datepicker-wrapper': {
         width: '100%',
         input: {
             border: 'none',
             outline: 'none',
-            color: `rgba(${theme.palette.customColors.main}, 0.42)`,
+            // color: `rgba(${theme.palette.customColors.main}, 0.42)`,
             backgroundColor: 'transparent',
             width: '100%'
         }
@@ -59,7 +59,7 @@ const StyleDatePicker = styled(Box)<StyleDatePickerProps>(({ theme, error }) => 
     },
     '.react-datepicker__day--keyboard-selected': {
         backgroundColor: theme.palette.primary.main,
-        color: theme.palette.customColors.lightPaperBg
+        // color: theme.palette.customColors.lightPaperBg
     },
     '.react-datepicker__month-container': {
         '.react-datepicker__month': {
@@ -70,18 +70,18 @@ const StyleDatePicker = styled(Box)<StyleDatePickerProps>(({ theme, error }) => 
             borderBottomRightRadius: '4px'
         },
         '.react-datepicker__day': {
-            color: `rgba(${theme.palette.customColors.main}, 0.42)`,
+            // color: `rgba(${theme.palette.customColors.main}, 0.42)`,
             '&:hover': {
-                backgroundColor: `rgba(${theme.palette.customColors.main}, 0.08)`
+                // backgroundColor: `rgba(${theme.palette.customColors.main}, 0.08)`
             },
             '&.react-datepicker__day--selected': {
                 backgroundColor: theme.palette.primary.main,
-                color: theme.palette.customColors.lightPaperBg
+                // color: theme.palette.customColors.lightPaperBg
             }
         }
     },
     '.react-datepicker': {
-        border: `1px solid rgba(${theme.palette.customColors.main}, 0.2)`
+        // border: `1px solid rgba(${theme.palette.customColors.main}, 0.2)`
     },
 
     '.date-picker-icon': {
@@ -109,7 +109,7 @@ const CustomDatePicker = (props: TCustomDatePicker) => {
                     fontSize: '13px',
                     marginBottom: '4px',
                     display: 'block',
-                    color: error ? theme.palette.error.main : `rgba(${theme.palette.customColors.main}, 0.68)`
+                    //color: error ? theme.palette.error.main : `rgba(${theme.palette.customColors.main}, 0.68)`
                 }}
             >
                 {label}
