@@ -4,9 +4,14 @@ type Breadcrumb = {
     darkMode?: boolean;
     start?: number;
     end?: number;
+    data: string[];
 } & HTMLAttributes<HTMLElement>;
 
 const Breadcrumb : React.FC<Breadcrumb> = ({ darkMode = false
       , start= 2, end , ...props}) => {
+    return (
+        <div>
 
+        </div>
+    )
 }
