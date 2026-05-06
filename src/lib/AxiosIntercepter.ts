@@ -1,33 +1,25 @@
-import axios, { AxiosRequestConfig } from 'axios'
-import React from "react";
-import {NextRouter} from "next/router";
-import {UserDataType} from "@/context/type";
+import axios from 'axios'
+import { ACCESS_TOKEN } from '@/config/auth'
 
-export const BASE_URL = `${process.env.NEXT_PUBLIC_API_HOST}/api`
+export const BASE_URL = `${process.env.NEXT_PUBLIC_API_HOST}/api/v1`
 
-const instanceAxios = axios.create({ baseURL: BASE_URL})
+const instanceAxios = axios.create()
 
+// Attach access token to every request
+instanceAxios.interceptors.request.use((config) => {
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem(ACCESS_TOKEN)
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`
+    }
+  }
+  return config
+})
 
-type TAxiosIntercepter = {
-    children: React.ReactNode
-}
+// Just reject — no refresh logic for now
+instanceAxios.interceptors.response.use(
+  (response) => response,
+  (error) => Promise.reject(error)
+)
 
-const handleRedirectLogin = (router: NextRouter, setUser: (data: UserDataType | null) => void) => {
-
-}
-
-let isRefreshing = false
-let failedQueue:any[] = []
-
-const processQueue = (error:any, token: string | null = null) => {
-    failedQueue.forEach((prom) => {
-        if(token) {
-            prom.resolve(token)
-        }else {
-            prom.reject(error)
-        }
-    })
-    failedQueue = []
-}
-
-
+export default instanceAxios

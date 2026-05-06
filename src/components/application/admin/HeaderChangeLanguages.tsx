@@ -37,7 +37,7 @@ const HeaderChangeLanguages = (props: Props) => {
     const open = Boolean(anchorEl);
     const [ imageLang, setImageLang ] = useState(imageForLang(lang))
     
-    function switchImgLang(langStr: string) {
+    function switchImgLang(langStr: TypeLang) {
         setImageLang(imageForLang(langStr))
         //console.log(langStr)
         dispatch(changeLang(langStr))

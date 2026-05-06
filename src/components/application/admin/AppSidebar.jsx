@@ -1,94 +1,94 @@
-"use client";
-
-import React from 'react'
-import {
-    Sidebar,
-    SidebarContent,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarGroupLabel,
-    SidebarHeader,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
-    SidebarMenuSub,
-    SidebarMenuSubButton,
-    SidebarMenuSubItem,
-    useSidebar
-} from "@/components/ui/sidebar"
+'use client'
+import React, { useState } from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
+import { adminAppSidebarMenu } from '@/lib/adminMenuSidebar'
+import { LuChevronDown } from 'react-icons/lu'
 import logoBlack from '@public/assets/images/logo-black.png'
 import logoWhite from '@public/assets/images/logo-white.png'
-import { Button } from '@/components/ui/button'
-import { LuChevronRight } from 'react-icons/lu'
-import { IoMdClose } from 'react-icons/io'
-import { adminAppSidebarMenu } from '@/lib/adminMenuSidebar'
-import { Collapsible } from '@/components/ui/collapsible'
-import { CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
-import Link from 'next/link'
-import { DropdownMenu, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { IconButton, Toolbar } from '@mui/material';
-import IconifyIcon from '@/components/customs/icons';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 
-const AppSidebar = ({ toggleDrawer, open }) => {
-    const { toggleSidebar } = useSidebar()
-    //console.log(toggleSidebar)
-    return (
-        <Sidebar className={``}>
+const AppSidebar = () => {
+  const pathname = usePathname()
+  const [openMenus, setOpenMenus] = useState({})
 
-            <SidebarHeader className='border-b h-14 p-0'>
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <div className='flex justify-between items-center px-4'>
-                            <Image src={logoBlack.src} height={50} width={logoBlack.width} className='block dark:hidden h-[50px] w-auto' alt='logo dark' />
+  const toggle = (title) =>
+    setOpenMenus((prev) => ({ ...prev, [title]: !prev[title] }))
 
-                            <Image src={logoWhite.src} height={50} width={logoWhite.width} className='hidden dark:block h-[50px] w-auto' alt='logo white' />
-                            <Button onClick={toggleSidebar} className='' type='button' size="icon" variant="ghost" >
-                                <IoMdClose color='#7f0369ff' size={50} className='border '/>
-                            </Button>
-                        </div>
-                    </DropdownMenuTrigger>
-                </DropdownMenu>
-            </SidebarHeader>
-            <SidebarContent className='p-3'>
-                <SidebarMenu>
-                    {adminAppSidebarMenu.map((menu, index) => (
-                        <Collapsible key={index} className='group/collapsible'>
-                            <SidebarMenuItem>
-                                <CollapsibleTrigger asChild>
-                                    <SidebarMenuButton asChild className='font-semibold px-2 py-5'>
-                                        <Link href={menu?.url}>
-                                            <menu.icon />
-                                            {menu.title}
-                                            {menu.submenu && menu.submenu.length > 0 &&
-                                                <LuChevronRight className='ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90' />}
-                                        </Link>
-                                    </SidebarMenuButton>
-                                </CollapsibleTrigger>
+  const isActive = (url) => url !== '#' && pathname.startsWith(url)
 
-                                {menu.submenu && menu.submenu.length > 0 &&
-                                    <CollapsibleContent>
-                                        <SidebarMenuSub>
-                                            {menu.submenu.map((submenuItem, submenuIndex) => (
-                                                <SidebarMenuSubItem key={submenuIndex}>
-                                                    <SidebarMenuSubButton asChild className='px-2 py-5'>
-                                                        <Link href={submenuItem?.url}>
-                                                            {submenuItem.title}
-                                                        </Link>
-                                                    </SidebarMenuSubButton>
-                                                </SidebarMenuSubItem>
-                                            ))}
-                                        </SidebarMenuSub>
-                                    </CollapsibleContent>
-                                }
-                            </SidebarMenuItem>
-                        </Collapsible>
-                    ))}
-                </SidebarMenu>
-            </SidebarContent>
-        </Sidebar>
-    )
+  return (
+    <aside className='w-64 shrink-0 h-screen sticky top-0 flex flex-col bg-white dark:bg-gray-900 border-r overflow-y-auto'>
+      {/* Logo */}
+      <div className='h-16 flex items-center px-5 border-b shrink-0'>
+        <Image src={logoBlack.src} height={36} width={120} className='block dark:hidden h-9 w-auto' alt='logo' />
+        <Image src={logoWhite.src} height={36} width={120} className='hidden dark:block h-9 w-auto' alt='logo' />
+      </div>
+
+      {/* Nav */}
+      <nav className='flex-1 px-3 py-4 space-y-1'>
+        {adminAppSidebarMenu.map((menu) => {
+          const Icon = menu.icon
+          const hasSubmenu = menu.submenu?.length > 0
+          const open = openMenus[menu.title]
+          const active = isActive(menu.url) || menu.submenu?.some((s) => isActive(s.url))
+
+          return (
+            <div key={menu.title}>
+              {hasSubmenu ? (
+                <button
+                  type='button'
+                  onClick={() => toggle(menu.title)}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
+                    ${active ? 'bg-primary/10 text-primary' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
+                >
+                  <Icon size={18} className='shrink-0' />
+                  <span className='flex-1 text-left'>{menu.title}</span>
+                  <LuChevronDown
+                    size={15}
+                    className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+                  />
+                </button>
+              ) : (
+                <Link
+                  href={menu.url}
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
+                    ${active ? 'bg-primary text-white' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
+                >
+                  <Icon size={18} className='shrink-0' />
+                  {menu.title}
+                </Link>
+              )}
+
+              {/* Submenu */}
+              {hasSubmenu && open && (
+                <div className='ml-7 mt-1 space-y-0.5 border-l pl-3'>
+                  {menu.submenu.map((sub) => (
+                    <Link
+                      key={sub.title}
+                      href={sub.url}
+                      className={`block px-2 py-2 rounded-lg text-sm transition-colors
+                        ${isActive(sub.url)
+                          ? 'text-primary font-medium'
+                          : 'text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'
+                        }`}
+                    >
+                      {sub.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </nav>
+
+      {/* Footer */}
+      <div className='px-4 py-3 border-t text-xs text-gray-400 shrink-0'>
+        © 2025 GreenCraze Admin
+      </div>
+    </aside>
+  )
 }
 
 export default AppSidebar

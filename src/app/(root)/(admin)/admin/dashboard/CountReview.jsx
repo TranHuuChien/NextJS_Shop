@@ -1,66 +1,37 @@
-'use client'
-import Link from "next/link"
-import { BiCategory } from "react-icons/bi"
+import React from 'react'
+import Link from 'next/link'
+import { BiCategory } from 'react-icons/bi'
+import { IoShirtOutline } from 'react-icons/io5'
+import { LuUserRound } from 'react-icons/lu'
+import { MdOutlineShoppingBag } from 'react-icons/md'
+import { ADMIN_CATEGORY_SHOW, ADMIN_PRODUCT_SHOW, ADMIN_CUSTOMER_SHOW } from '@/routes/AdminPanelRoute'
 
-const CountOverview = () => {
-  return (
-    <div className="grid lg:grid-cols-4 sm:grid-cols-2 sm:gap-10 gap-5">
-      <Link href=''>
-        <div className="flex items-center justify-between p-3 rounded-lg border shadow border-l-4 
-        border-l-green-400 bg-white dark:bg-card dark:border-gray-500 dark:border-l-green-400">
-          <div>
-            <h4 className="font-medium text-gray-500">Total Categories</h4>
-            <span className="text-xl font-bold">10</span>
-          </div>
-          <div className="">
-            <span className="w-12 h-12 border flex justify-center items-center rounded-full bg-green-400 text-white"><BiCategory color="green"/></span>
-          </div>
-        </div>
-      </Link>
+const STATS = [
+  { label: 'Total Categories', value: '—', icon: BiCategory, color: 'text-green-600', bg: 'bg-green-100', border: 'border-l-green-500', href: ADMIN_CATEGORY_SHOW },
+  { label: 'Total Products',   value: '—', icon: IoShirtOutline, color: 'text-blue-600', bg: 'bg-blue-100', border: 'border-l-blue-500', href: ADMIN_PRODUCT_SHOW },
+  { label: 'Total Customers',  value: '—', icon: LuUserRound, color: 'text-amber-600', bg: 'bg-amber-100', border: 'border-l-amber-500', href: ADMIN_CUSTOMER_SHOW },
+  { label: 'Total Orders',     value: '—', icon: MdOutlineShoppingBag, color: 'text-purple-600', bg: 'bg-purple-100', border: 'border-l-purple-500', href: '#' },
+]
 
-      <Link href=''>
-        <div className="flex items-center justify-between p-3 rounded-lg border shadow border-l-4 
-        border-l-blue-400 bg-white dark:bg-card dark:border-gray-500 dark:border-l-blue-400">
-          <div>
-            <h4 className="font-medium text-gray-500">Total Products</h4>
-            <span className="text-xl font-bold">10</span>
+const CountOverview = () => (
+  <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4'>
+    {STATS.map((stat) => {
+      const Icon = stat.icon
+      return (
+        <Link key={stat.label} href={stat.href}>
+          <div className={`flex items-center justify-between p-5 rounded-xl bg-white dark:bg-gray-900 border border-l-4 ${stat.border} shadow-sm hover:shadow-md transition-shadow`}>
+            <div>
+              <p className='text-sm text-gray-500 dark:text-gray-400 mb-1'>{stat.label}</p>
+              <p className='text-2xl font-bold text-gray-800 dark:text-white'>{stat.value}</p>
+            </div>
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${stat.bg}`}>
+              <Icon size={22} className={stat.color} />
+            </div>
           </div>
-          <div className="">
-            <span className="w-12 h-12 border flex justify-center items-center rounded-full bg-blue-400 text-white"><BiCategory color="blue"/></span>
-          </div>
-        </div>
-      </Link>
-
-      <Link href=''>
-        <div className="flex items-center justify-between p-3 rounded-lg border shadow border-l-4 
-        border-l-yellow-400 bg-white dark:bg-card dark:border-gray-500 dark:border-l-yellow-400">
-          <div>
-            <h4 className="font-medium text-gray-500">Total Customers</h4>
-            <span className="text-xl font-bold">10</span>
-          </div>
-          <div className="">
-            <span className="w-12 h-12 border flex justify-center items-center rounded-full bg-border-400 text-white"><BiCategory color="border"/></span>
-          </div>
-        </div>
-      </Link>
-
-
-      <Link href=''>
-        <div className="flex items-center justify-between p-3 rounded-lg border shadow border-l-4 
-        border-l-cyan-400 bg-white dark:bg-card dark:border-gray-500 dark:border-l-cyan-400">
-          <div>
-            <h4 className="font-medium text-gray-500">Total Orders</h4>
-            <span className="text-xl font-bold">10</span>
-          </div>
-          <div className="">
-            <span className="w-12 h-12 border flex justify-center items-center rounded-full bg-cyan-400 text-white"><BiCategory color="cyan"/></span>
-          </div>
-        </div>
-      </Link>
-
-
-    </div>
-  )
-}
+        </Link>
+      )
+    })}
+  </div>
+)
 
 export default CountOverview

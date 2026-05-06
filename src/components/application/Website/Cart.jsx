@@ -1,114 +1,218 @@
 'use client'
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import Image from 'next/image'
 import React, { useState } from 'react'
-import { BsCart2 } from 'react-icons/bs'
-import { useDispatch, useSelector } from 'react-redux'
-import imgPlaceHolder from '@public/assets/images/img-placeholder.webp'
-import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetDescription } from '@/components/ui/sheet'
+import { Button } from '@/components/ui/button'
+import { BsCart2 } from 'react-icons/bs'
+import { HiMinus, HiPlus } from 'react-icons/hi2'
+import { RiDeleteBin6Line } from 'react-icons/ri'
 import { WEBSITE_CART, WEBSITE_CHECKOUT } from '@/routes/WebsiteRoute'
-import { showToast } from '@/lib/showToast'
+import imgPlaceholder from '@public/assets/images/img-placeholder.webp'
+import { useCart, useUpdateCartItem, useDeleteCartItem } from '@/hooks/useCart'
+import useAuth from '@/hooks/useAuth'
 
-const cart = {
-  product: [
-    {
-      variantId: "v1",
-      name: "Áo thun nam",
-      description: "Chất liệu cotton, thoáng mát",
-      media: "",
-      quantity: 12,
-      sellingPrice: 1000
-    },
-    {
-      variantId: "v2",
-      name: "Quần jeans",
-      description: "Quần jean xanh basic",
-      media: "",
-      quantity: 12,
-      sellingPrice: 1000
-    },
-    {
-      variantId: "v3",
-      name: "Giày sneaker",
-      description: "Giày thể thao phong cách",
-      media: "",
-      quantity: 12,
-      sellingPrice: 1000
-    }
-  ]
-}
+const formatVND = (n) => n?.toLocaleString('vi-VN') + '₫'
+
+const CartItemSkeleton = () => (
+  <div className='flex gap-3 pb-4 border-b animate-pulse'>
+    <div className='w-16 h-16 rounded-lg bg-gray-200 shrink-0' />
+    <div className='flex-1 space-y-2 pt-1'>
+      <div className='h-3 bg-gray-200 rounded w-3/4' />
+      <div className='h-3 bg-gray-200 rounded w-1/2' />
+      <div className='h-3 bg-gray-200 rounded w-1/4' />
+    </div>
+  </div>
+)
 
 const Cart = () => {
-  const [open , setOpen] = useState(false)
-  //const cart = useSelector(store => store.cartStore)
-  const dispatch = useDispatch()
+  const [open, setOpen] = useState(false)
+  const { user } = useAuth()
+
+  const { data: items = [], isLoading } = useCart(open && !!user)
+  const updateMutation = useUpdateCartItem()
+  const deleteMutation = useDeleteCartItem()
+
+  const handleQty = (id, currentQty, delta, stock) => {
+    const next = Math.max(1, Math.min(stock, currentQty + delta))
+    if (next !== currentQty) {
+      updateMutation.mutate({ id, quantity: next })
+    }
+  }
+
+  const handleDelete = (id) => deleteMutation.mutate(id)
+
+  const subtotal = items.reduce((sum, i) => {
+    const price = i.promotionalItemPrice < i.itemPrice ? i.promotionalItemPrice : i.itemPrice
+    return sum + price * i.quantity
+  }, 0)
+
+  const totalQty = items.reduce((sum, i) => sum + i.quantity, 0)
+  const freeShippingThreshold = 500000
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger className='relative'>
-        <BsCart2 size={25} className='text-gray-500 hover:text-primary'/>
+      <SheetTrigger asChild>
+        <button type='button' className='relative'>
+          <BsCart2 size={22} className='text-gray-500 hover:text-primary transition-colors' />
+          {totalQty > 0 && (
+            <span className='absolute -top-1.5 -right-1.5 w-4 h-4 bg-primary text-white text-[10px] font-bold rounded-full flex items-center justify-center'>
+              {totalQty > 9 ? '9+' : totalQty}
+            </span>
+          )}
+        </button>
       </SheetTrigger>
-      <SheetContent  className="bg-white">
-        <SheetHeader>
-          <SheetTitle className='text-2xl'>My Cart</SheetTitle>
-          <SheetDescription></SheetDescription>
+
+      <SheetContent className='bg-white flex flex-col p-0 w-[380px]'>
+        <SheetHeader className='px-5 pt-5 pb-3 border-b'>
+          <SheetTitle className='text-lg font-semibold flex items-center gap-2'>
+            <BsCart2 size={20} />
+            My Cart
+            {!isLoading && totalQty > 0 && (
+              <span className='ml-1 text-sm font-normal text-gray-400'>({totalQty} items)</span>
+            )}
+          </SheetTitle>
+          <SheetDescription />
         </SheetHeader>
 
-        <div className='h-[calc(100vh-40px)] pb-10 pt-2'>
-          <div className='h-[calc(100%-120px)] border border-red-500 overflow-auto pe-2'>
-              {cart.count === 0 && <div className='h-full flex justify-center items-center text-xl font-semibold'>
-                  Your Cart is empty
+        {/* Items */}
+        <div className='flex-1 overflow-y-auto px-5 py-3 space-y-4'>
+          {!user ? (
+            <div className='h-full flex flex-col items-center justify-center gap-3 py-16 text-center'>
+              <BsCart2 size={48} className='text-gray-200' />
+              <p className='text-gray-400 font-medium'>Login to view your cart</p>
+              <Button size='sm' className='bg-primary text-white' onClick={() => setOpen(false)} asChild>
+                <Link href='/auth/login'>Login</Link>
+              </Button>
+            </div>
+          ) : isLoading ? (
+            <>
+              <CartItemSkeleton />
+              <CartItemSkeleton />
+              <CartItemSkeleton />
+            </>
+          ) : items.length === 0 ? (
+            <div className='h-full flex flex-col items-center justify-center gap-3 py-16 text-center'>
+              <BsCart2 size={48} className='text-gray-200' />
+              <p className='text-gray-400 font-medium'>Your cart is empty</p>
+              <Button variant='outline' size='sm' onClick={() => setOpen(false)} asChild>
+                <Link href='/shop'>Browse Products</Link>
+              </Button>
+            </div>
+          ) : (
+            items.map((item) => {
+              const price = item.promotionalItemPrice < item.itemPrice
+                ? item.promotionalItemPrice
+                : item.itemPrice
+              const hasPromo = item.promotionalItemPrice < item.itemPrice
 
-                </div>}
+              return (
+                <div key={item.id} className='flex gap-3 pb-4 border-b last:border-0'>
+                  {/* Image */}
+                  <Link
+                    href={item.productSlug ? `/product/${item.productSlug}` : '#'}
+                    onClick={() => setOpen(false)}
+                    className='w-16 h-16 rounded-lg overflow-hidden bg-gray-100 shrink-0'
+                  >
+                    <img
+                      src={item.productImage || imgPlaceholder.src}
+                      alt={item.productName}
+                      className='w-full h-full object-cover hover:scale-105 transition-transform'
+                    />
+                  </Link>
 
-                {cart?.product?.map(product => (
-                  <div key={product.variantId} className='flex justify-center items-center gap-5 mb-4
-                  border-b pb-4'>
-                      <div className='flex gap-5 items-center'>
-                        <Image src={product?.media || imgPlaceHolder.src} 
-                            height={100} width={100} 
-                            alt={product?.name}
-                            className='w-20 h-20 rounded'
-                        />
-                        <div>
-                          <h4 className='text-lg mb-1'>{product?.name}</h4>
-                          <p className='text-gray-500'>{product?.description}</p>
-                        </div>
-                      </div>
+                  {/* Info */}
+                  <div className='flex-1 min-w-0'>
+                    <Link
+                      href={item.productSlug ? `/product/${item.productSlug}` : '#'}
+                      onClick={() => setOpen(false)}
+                      className='text-sm font-medium line-clamp-1 hover:text-primary transition-colors'
+                    >
+                      {item.productName}
+                    </Link>
+                    <p className='text-xs text-gray-400 mt-0.5'>{item.variantName}</p>
 
-                      <div>
-                        <button type='button' className='text-red-500 underline underline-offset-1 mb-2'>
-                              Remove
+                    {/* Price */}
+                    <div className='flex items-center gap-1.5 mt-1'>
+                      <span className='text-sm font-semibold text-primary'>{formatVND(price)}</span>
+                      {hasPromo && (
+                        <span className='text-xs text-gray-400 line-through'>{formatVND(item.itemPrice)}</span>
+                      )}
+                    </div>
+
+                    {/* Qty + delete */}
+                    <div className='flex items-center justify-between mt-2'>
+                      <div className='flex items-center border rounded-lg overflow-hidden'>
+                        <button
+                          type='button'
+                          onClick={() => handleQty(item.id, item.quantity, -1, item.stock)}
+                          disabled={item.quantity <= 1 || updateMutation.isPending}
+                          className='w-7 h-7 flex items-center justify-center hover:bg-gray-100 disabled:opacity-30 transition-colors'
+                        >
+                          <HiMinus size={11} />
                         </button>
-                        <p className='font-semibold text-lg'>
-                          {product.quantity} X {product.sellingPrice}
-                        </p>
+                        <span className='w-7 text-center text-sm'>{item.quantity}</span>
+                        <button
+                          type='button'
+                          onClick={() => handleQty(item.id, item.quantity, 1, item.stock)}
+                          disabled={item.quantity >= item.stock || updateMutation.isPending}
+                          className='w-7 h-7 flex items-center justify-center hover:bg-gray-100 disabled:opacity-30 transition-colors'
+                        >
+                          <HiPlus size={11} />
+                        </button>
                       </div>
+
+                      <button
+                        type='button'
+                        onClick={() => handleDelete(item.id)}
+                        disabled={deleteMutation.isPending}
+                        className='text-gray-300 hover:text-red-500 transition-colors p-1 disabled:opacity-40'
+                      >
+                        <RiDeleteBin6Line size={15} />
+                      </button>
+                    </div>
                   </div>
-                ))}
-          </div>
-
-          <div className='  h-32 border-t pt-5 px-2'>
-              <h4 className='flex justify-between items-center  font-semibold'><span>Subtotal</span>
-              <span>0</span></h4>
-              
-              <h4 className='flex justify-between items-center  font-semibold'><span>Discount</span>
-              <span>0</span></h4>
-
-              <div className='flex justify-between gap-10'>
-                <Button type='button' asChild variant='secondary' className='w-1/2' onClick={() => setOpen(false)}>
-                  <Link href={WEBSITE_CART}>View Cart</Link>
-                </Button>
-                <Button type='button' asChild variant='secondary' className='w-1/2' onClick={() => setOpen(false)}>
-                  { cart.count ? 
-                      <Link href={WEBSITE_CHECKOUT}>Checkout</Link>
-                    : <button type='button' className='' onClick={() => showToast('error', 'Your cart is empty')}>Checkout</button>
-                  }
-                  
-                </Button>
-              </div>
-          </div>
+                </div>
+              )
+            })
+          )}
         </div>
+
+        {/* Footer */}
+        {user && !isLoading && items.length > 0 && (
+          <div className='border-t px-5 py-4 space-y-3 bg-gray-50'>
+            {/* Free shipping progress */}
+            {subtotal < freeShippingThreshold && (
+              <div>
+                <p className='text-xs text-gray-500 mb-1'>
+                  Add <span className='font-medium text-primary'>{formatVND(freeShippingThreshold - subtotal)}</span> more for free shipping
+                </p>
+                <div className='w-full h-1.5 bg-gray-200 rounded-full overflow-hidden'>
+                  <div
+                    className='h-full bg-primary rounded-full transition-all'
+                    style={{ width: `${Math.min(100, (subtotal / freeShippingThreshold) * 100)}%` }}
+                  />
+                </div>
+              </div>
+            )}
+            {subtotal >= freeShippingThreshold && (
+              <p className='text-xs text-green-600 font-medium'>🎉 You qualify for free shipping!</p>
+            )}
+
+            <div className='flex justify-between text-sm'>
+              <span className='text-gray-500'>Subtotal</span>
+              <span className='font-semibold'>{formatVND(subtotal)}</span>
+            </div>
+
+            <div className='flex gap-2'>
+              <Button variant='outline' className='flex-1 h-10 text-sm' onClick={() => setOpen(false)} asChild>
+                <Link href={WEBSITE_CART}>View Cart</Link>
+              </Button>
+              <Button className='flex-1 h-10 text-sm bg-primary text-white' onClick={() => setOpen(false)} asChild>
+                <Link href={WEBSITE_CHECKOUT}>Checkout</Link>
+              </Button>
+            </div>
+          </div>
+        )}
       </SheetContent>
     </Sheet>
   )

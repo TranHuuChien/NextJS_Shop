@@ -1,75 +1,93 @@
 'use client'
-import React from 'react'
-import dynamic from "next/dynamic";
+import React, { useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import ThemeSwitch from './ThemeSwitch'
 import UserDropdown from './UserDropdown'
-import { Button } from '@/components/ui/button'
-import { RiMenu4Fill } from 'react-icons/ri'
-import OptionMenu from './OptionMenu'
-import AdminSearch from './AdminSearch'
-import Image from 'next/image'
-import {
-    Sidebar,
-    SidebarContent,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarGroupLabel,
-    SidebarHeader,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
-    SidebarMenuSub,
-    SidebarMenuSubButton,
-    SidebarMenuSubItem,
-    useSidebar
-} from "@/components/ui/sidebar"
+import { HiMiniBars3 } from 'react-icons/hi2'
+import { IoIosSearch } from 'react-icons/io'
+import { FiBell } from 'react-icons/fi'
 import logoBlack from '@public/assets/images/logo-black.png'
 import logoWhite from '@public/assets/images/logo-white.png'
-import AdminSearchMobile from './AdminSearchMobile'
-import HeaderChangeLanguages from './HeaderChangeLanguages'
-import { HiMiniBars3 } from 'react-icons/hi2';
-import CartProduct from "@/layouts/CartProductLayout";
-import NotificationDropdown from "@/layouts/DropdownNotification";
 
+// Build breadcrumb from pathname
+const useBreadcrumb = () => {
+  const pathname = usePathname()
+  const parts = pathname.split('/').filter(Boolean)
+  return parts.map((part, i) => ({
+    label: part.charAt(0).toUpperCase() + part.slice(1),
+    href: '/' + parts.slice(0, i + 1).join('/'),
+  }))
+}
 
+const TopBar = ({ toggleDrawer }) => {
+  const [search, setSearch] = useState('')
+  const crumbs = useBreadcrumb()
 
-const TopBar = ({ toggleDrawer, open }) => {
-  //const { toggleSidebar } = useSidebar()
-  const [isMobileMenu, setIsMobileMenu] = React.useState(false)
-  const toggleDrawer1 = () => {
-    console.log(toggleDrawer)
-    //setOpen(!open)
-  }
   return (
-    <div className='absolute border h-14 w-full top-0 z-30 p-2
-             flex justify-between items-center bg-white dark:bg-card'>
-        {/* <div>Search component</div> */}
-        <div className='flex items-center md:hidden'>
-            <Image src={logoBlack.src} height={20} width={logoBlack.width} className='block dark:hidden h-[50px] w-auto' alt='logo dark' />
-            <Image src={logoWhite.src} height={50} width={logoWhite.width} className='hidden dark:block h-[50px] w-auto' alt='logo white'/>
-        </div>
-        <div className='md:block hidden'>
-          <AdminSearch/>
+    <header className='h-16 w-full flex items-center justify-between px-5 border-b bg-white dark:bg-gray-900 sticky top-0 z-30'>
+      {/* Left: hamburger (mobile) + breadcrumb */}
+      <div className='flex items-center gap-3'>
+        <button
+          type='button'
+          className='lg:hidden text-gray-500 hover:text-primary'
+          onClick={toggleDrawer}
+        >
+          <HiMiniBars3 size={24} />
+        </button>
+
+        {/* Mobile logo */}
+        <div className='lg:hidden'>
+          <Image src={logoBlack.src} height={32} width={100} className='block dark:hidden h-8 w-auto' alt='logo' />
+          <Image src={logoWhite.src} height={32} width={100} className='hidden dark:block h-8 w-auto' alt='logo' />
         </div>
 
-        <div className='flex items-center'>
-          <AdminSearchMobile />
-          <ThemeSwitch/>
-          
-          <UserDropdown/>
+        {/* Breadcrumb — desktop */}
+        <nav className='hidden lg:flex items-center gap-1.5 text-sm text-gray-400'>
+          {crumbs.map((crumb, i) => (
+            <React.Fragment key={crumb.href}>
+              {i > 0 && <span>/</span>}
+              <Link
+                href={crumb.href}
+                className={i === crumbs.length - 1
+                  ? 'text-gray-700 dark:text-gray-200 font-medium'
+                  : 'hover:text-primary transition-colors'}
+              >
+                {crumb.label}
+              </Link>
+            </React.Fragment>
+          ))}
+        </nav>
+      </div>
 
-          <HeaderChangeLanguages/>
-          {/* <Button type='button' size='icon' className='ms-2' onClick={toggleSidebar}>
-            <RiMenu4Fill/>
-          </Button> */}
-          {/* <OptionMenu/> */}
-          <CartProduct/>
-          <NotificationDropdown/>
-          <button type='button' className='lg:hidden block' onClick={toggleDrawer}>
-            <HiMiniBars3 size={25} className='text-gray-500 hover:text-primary'/>
-          </button>
+      {/* Right: search + actions */}
+      <div className='flex items-center gap-2'>
+        {/* Search */}
+        <div className='hidden md:flex items-center gap-2 bg-gray-100 dark:bg-gray-800 rounded-lg px-3 py-2 w-52'>
+          <IoIosSearch size={16} className='text-gray-400 shrink-0' />
+          <input
+            type='text'
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder='Search...'
+            className='bg-transparent text-sm outline-none w-full text-gray-600 dark:text-gray-300 placeholder-gray-400'
+          />
         </div>
-    </div>
+
+        {/* Notifications */}
+        <button
+          type='button'
+          className='relative w-9 h-9 flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 transition-colors'
+        >
+          <FiBell size={18} />
+          <span className='absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full' />
+        </button>
+
+        <ThemeSwitch />
+        <UserDropdown />
+      </div>
+    </header>
   )
 }
 

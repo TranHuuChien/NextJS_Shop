@@ -1,170 +1,105 @@
-"use client";
-import { Card, CardContent } from "@/components/ui/card";
-import Image from "next/image";
-import React, { useState } from "react";
-import Logo from "../../../../../public/assets/images/logo-black.png";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { zSchema } from "@/lib/zodSchema";
-import { useForm } from "react-hook-form";
+'use client'
+import { Card, CardContent } from '@/components/ui/card'
+import Image from 'next/image'
+import React, { useState } from 'react'
+import Logo from '../../../../../public/assets/images/logo-black.png'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import ButtonLoading from '@/components/Application/ButtonLoading'
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
+import Link from 'next/link'
+import { WEBSITE_REGISTER, WEBSITE_RESETPASSWORD } from '@/routes/WebsiteRoute'
+import useAuth from '@/hooks/useAuth'
 
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import ButtonLoading from "@/components/Application/ButtonLoading";
-import { z } from "zod";
-import { FaRegEyeSlash } from "react-icons/fa";
-import { FaRegEye } from "react-icons/fa";
-import Link from "next/link";
-import { WEBSITE_REGISTER, WEBSITE_RESETPASSWORD } from "@/routes/WebsiteRoute";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { loginAuth } from "@/api/auth";
+const formSchema = z.object({
+  username: z.string().min(1, 'Username is required'),
+  password: z.string().min(1, 'Password is required'),
+})
 
 const LoginPage = () => {
-  //const dispatch = useDispatch()
-  const [loading, setLoading] = useState(false);
-  const [isTypePassword, setIsTypePassword] = useState(true);
-  const formSchema = zSchema
-    .pick({
-      email: true,
-    })
-    .extend({
-      password: z.string().min("3", "Password fields is required"),
-    });
+  const { login } = useAuth()
+  const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const form = useForm({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
+    defaultValues: { username: '', password: '' },
+  })
 
-  const handleLoginSubmit = async (values) => {
+  const handleSubmit = async (values) => {
     try {
-      setLoading(true);
-      //const { data: registerResponse } = await axios.post('/api/login/login', values)
-      const { data: loginResponse } = loginAuth(values);
-      if (!loginResponse) {
-        throw new Error(loginResponse.message);
-      }
-      set;
-    } catch (error) {}
-  };
+      setLoading(true)
+      await login(values)
+    } catch {
+      // error toast handled in AuthContext
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
-    <Card className="w-[450px] ">
+    <Card className="w-[450px]">
       <CardContent>
-        <div className="flex justify-center">
-          <Image
-            src={Logo.src}
-            width={Logo.width}
-            height={Logo.height}
-            alt="logo"
-            className="max-w-[100px]"
-          />
+        <div className="flex justify-center pt-4">
+          <Image src={Logo.src} width={Logo.width} height={Logo.height} alt="logo" className="max-w-[100px]" />
         </div>
-        <div className="text-center">
-          <h1 className="text-2xl font-semibold text-center">
-            Login Info Account
-          </h1>
-          <p>Login into your account by filling out the form below</p>
+        <div className="text-center mb-4">
+          <h1 className="text-2xl font-semibold">Login to your account</h1>
+          <p className="text-sm text-muted-foreground">Enter your credentials below</p>
         </div>
-        <div className="mt-3">
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(handleLoginSubmit)}
-              className="space-y-8"
-            >
-              <div className="mb-3">
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="email"
-                          placeholder="abc@gmail.com"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage className="text-red-500" />
-                      {/* <FormDescription/> */}
-                    </FormItem>
-                  )}
-                />
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Username / Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder="your@email.com" {...field} />
+                  </FormControl>
+                  <FormMessage className="text-red-500" />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem className="relative">
+                  <FormLabel>Password</FormLabel>
+                  <div className="flex items-center">
+                    <FormControl>
+                      <Input type={showPassword ? 'text' : 'password'} placeholder="••••••••" {...field} />
+                    </FormControl>
+                    <button
+                      type="button"
+                      className="absolute right-3 top-9 text-muted-foreground"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                    </button>
+                  </div>
+                  <FormMessage className="text-red-500" />
+                </FormItem>
+              )}
+            />
+            <ButtonLoading type="submit" text="Login" className="w-full bg-purple-600 text-white" loading={loading} />
+            <div className="flex justify-between text-sm">
+              <div className="flex gap-1">
+                <span>No account?</span>
+                <Link href={WEBSITE_REGISTER} className="text-primary underline">Register</Link>
               </div>
-              <div className="mt-3">
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem className="relative">
-                      <FormLabel>Password</FormLabel>
-                      <div className="flex justify-center items-center">
-                        <FormControl>
-                          <Input
-                            type={isTypePassword ? "password" : "text"}
-                            placeholder="*******"
-                            {...field}
-                          />
-                        </FormControl>
-                        <button
-                          type="button"
-                          className="absolute top-1/2 -translate-y-1/2 right-2 cursor-pointer"
-                          onClick={() => setIsTypePassword(!isTypePassword)}
-                        >
-                          {isTypePassword ? <FaRegEyeSlash /> : <FaRegEye />}
-                        </button>
-                      </div>
-                      <FormMessage className="text-red-500" />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="mt-3">
-                <ButtonLoading
-                  type="submit"
-                  text="Login"
-                  className="w-full bg-purple-600 text-white"
-                  loading={loading}
-                />
-              </div>
-              <div className="text-center flex justify-between items-center gap-1">
-                <div className="flex justify-center items-center gap-1">
-                  <p>Don`t have account</p>
-                  <Link
-                    href={WEBSITE_REGISTER}
-                    className="text-primary text-sm underline"
-                  >
-                    Create account
-                  </Link>
-                </div>
-                <div className="">
-                  <Link
-                    href={WEBSITE_RESETPASSWORD}
-                    className="text-primary text-sm underline"
-                  >
-                    Forgot password
-                  </Link>
-                </div>
-              </div>
-            </form>
-          </Form>
-        </div>
+              <Link href={WEBSITE_RESETPASSWORD} className="text-primary underline">Forgot password?</Link>
+            </div>
+          </form>
+        </Form>
       </CardContent>
     </Card>
-  );
-};
+  )
+}
 
-export default LoginPage;
+export default LoginPage

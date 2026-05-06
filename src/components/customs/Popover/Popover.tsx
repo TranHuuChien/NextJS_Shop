@@ -1,3 +1,4 @@
+'use client'
 import React, {HTMLAttributes, useState} from "react";
 import {OutsideClick} from "@/components/customs/OutsideClick/OutsideClick";
 
@@ -24,7 +25,7 @@ const Popover: React.FC<PopoverProps> = ({ isOpen: isOpenProp, setIsOpen: setIsO
     }) : null;
 
     return (
-        <OutsideClick onClickOutside={() => setIsOpen(false)}>
+        <OutsideClick onClickOutside={() => setIsOpen(true)}>
             <div {...props} className={`${props.className ? props.className : ""} popover`}>
                 {trigger}
                 {content}
@@ -32,3 +33,4 @@ const Popover: React.FC<PopoverProps> = ({ isOpen: isOpenProp, setIsOpen: setIsO
         </OutsideClick>
     )
 }
+export default Popover;

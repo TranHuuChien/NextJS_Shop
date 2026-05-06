@@ -1,66 +1,37 @@
-'use client'
-import Link from 'next/link'
 import React from 'react'
-import { BiCategory } from "react-icons/bi"
+import Link from 'next/link'
+import { BiCategory } from 'react-icons/bi'
+import { IoShirtOutline } from 'react-icons/io5'
+import { RiCoupon2Line } from 'react-icons/ri'
+import { MdOutlinePermMedia } from 'react-icons/md'
+import { ADMIN_CATEGORY_ADD, ADMIN_PRODUCT_ADD, ADMIN_COUPON_ADD, ADMIN_MEDIA_SHOW } from '@/routes/AdminPanelRoute'
 
-const QuickAdd = () => {
-  return (
-    <div className='grid grid-cols-4 sm:grid-cols-4 gap-4 sm:gap-4'>
-      <Link href=''>
-        <div className="flex items-center justify-between p-3 rounded-lg border shadow border-l-4 
-        border-l-green-400 bg-white dark:bg-card dark:border-gray-500 dark:border-l-green-400">
-          <div>
-            <h4 className="font-medium text-gray-500">Total Categories</h4>
-            <span className="text-xl font-bold">10</span>
-          </div>
-          <div className="">
-            <span className="w-12 h-12 border flex justify-center items-center rounded-full bg-green-400 text-white"><BiCategory color="green"/></span>
-          </div>
-        </div>
-      </Link>
+const QUICK_ACTIONS = [
+  { label: 'Add Category', icon: BiCategory,       href: ADMIN_CATEGORY_ADD, color: 'text-green-600', bg: 'bg-green-50 hover:bg-green-100' },
+  { label: 'Add Product',  icon: IoShirtOutline,   href: ADMIN_PRODUCT_ADD,  color: 'text-blue-600',  bg: 'bg-blue-50 hover:bg-blue-100' },
+  { label: 'Add Coupon',   icon: RiCoupon2Line,    href: ADMIN_COUPON_ADD,   color: 'text-amber-600', bg: 'bg-amber-50 hover:bg-amber-100' },
+  { label: 'Media',        icon: MdOutlinePermMedia, href: ADMIN_MEDIA_SHOW, color: 'text-purple-600', bg: 'bg-purple-50 hover:bg-purple-100' },
+]
 
-      <Link href=''>
-        <div className="flex items-center justify-between p-3 rounded-lg border shadow border-l-4 
-        border-l-blue-400 bg-white dark:bg-card dark:border-gray-500 dark:border-l-blue-400">
-          <div>
-            <h4 className="font-medium text-gray-500">Total Products</h4>
-            <span className="text-xl font-bold">10</span>
-          </div>
-          <div className="">
-            <span className="w-12 h-12 border flex justify-center items-center rounded-full bg-blue-400 text-white"><BiCategory color="blue"/></span>
-          </div>
-        </div>
-      </Link>
-
-      <Link href=''>
-        <div className="flex items-center justify-between p-3 rounded-lg border shadow border-l-4 
-        border-l-yellow-400 bg-white dark:bg-card dark:border-gray-500 dark:border-l-yellow-400">
-          <div>
-            <h4 className="font-medium text-gray-500">Total Customers</h4>
-            <span className="text-xl font-bold">10</span>
-          </div>
-          <div className="">
-            <span className="w-12 h-12 border flex justify-center items-center rounded-full bg-border-400 text-white"><BiCategory color="border"/></span>
-          </div>
-        </div>
-      </Link>
-
-
-      <Link href=''>
-        <div className="flex items-center justify-between p-3 rounded-lg border shadow border-l-4 
-        border-l-cyan-400 bg-white dark:bg-card dark:border-gray-500 dark:border-l-cyan-400">
-          <div>
-            <h4 className="font-medium text-gray-500">Total Orders</h4>
-            <span className="text-xl font-bold">10</span>
-          </div>
-          <div className="">
-            <span className="w-12 h-12 border flex justify-center items-center rounded-full bg-cyan-400 text-white"><BiCategory color="cyan"/></span>
-          </div>
-        </div>
-      </Link>
-
+const QuickAdd = () => (
+  <div>
+    <h3 className='text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3'>Quick Actions</h3>
+    <div className='grid grid-cols-2 sm:grid-cols-4 gap-3'>
+      {QUICK_ACTIONS.map((action) => {
+        const Icon = action.icon
+        return (
+          <Link key={action.label} href={action.href}>
+            <div className={`flex flex-col items-center justify-center gap-2 p-4 rounded-xl border transition-colors cursor-pointer ${action.bg} dark:bg-gray-800 dark:hover:bg-gray-700`}>
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center bg-white dark:bg-gray-700 shadow-sm`}>
+                <Icon size={20} className={action.color} />
+              </div>
+              <span className='text-xs font-medium text-gray-700 dark:text-gray-300'>{action.label}</span>
+            </div>
+          </Link>
+        )
+      })}
     </div>
-  )
-}
+  </div>
+)
 
 export default QuickAdd

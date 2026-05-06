@@ -1,5 +1,7 @@
 export const ADMIN_DASHBOARD = '/admin/dashboard'
 
+export const SHOP_PAGE = '/shop'
+
 //Media routes
 export const ADMIN_MEDIA_SHOW = '/admin/media'
 export const ADMIN_MEDIA_EDIT = (id: number) => id ? `/admin/media/edit/${id}` : ''
@@ -22,8 +24,12 @@ export const ADMIN_COUPON_SHOW = '/admin/coupon'
 export const ADMIN_COUPON_EDIT = (id: number) => id ? `/admin/coupon/edit/${id}` : ''
 
 //Customer
-export const ADMIN_CUSTOMER_DASHBOARD = '/admin/roles'
-export const ADMIN_CUSTOMER_SHOW = '/admin/roles'
+export const ADMIN_CUSTOMER_DASHBOARD = '/admin/customers'
+export const ADMIN_CUSTOMER_SHOW = '/admin/customers'
+
+//Order routes
+export const ADMIN_ORDER_SHOW = '/admin/orders'
+export const ADMIN_ORDER_DETAIL = (id: number) => id ? `/admin/orders/${id}` : ''
 
 //Trash route
 export const ADMIN_TRASH = '/admin/trash'

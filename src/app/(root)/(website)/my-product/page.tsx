@@ -2,7 +2,6 @@
 import {useState} from "react";
 import {PAGE_SIZE_OPTION} from "@/app/(root)/(admin)/admin/category/page";
 import {styled, useTheme} from "@mui/material/styles";
-import Spinner from "@/components/customs/spinner";
 import {Box, Grid, Tab, Tabs, TabsProps} from "@mui/material";
 import InputSearch from "@/components/customs/input-search";
 import CardSkeleton from "@/components/Application/CardSkeleton";
@@ -10,6 +9,7 @@ import NoData from "@/components/customs/no-data";
 import CardProduct from "@/components/Application/CardProduct";
 import {TProduct} from "@/types/product";
 import CustomPagination from "@/components/customs/custom-pagination";
+import Loading from "@/components/application/Loading";
 
 
 const TYPE_VALUE = {
@@ -131,11 +131,13 @@ const MyProductPage = (props : TProps) => {
     const theme = useTheme()
 
     const handleOnChangePagination = (page: number, pageSize: number) => {
+        setLoading(true)
         setPage(page);
         setPageSize(pageSize);
     }
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+        setLoading(true)
         setTabActive(newValue)
         setPage(1)
         setPageSize(PAGE_SIZE_OPTION[0])
@@ -144,7 +146,7 @@ const MyProductPage = (props : TProps) => {
 
     return (
         <>
-            {/*{loading || <Spinner/>}*/}
+            {loading || <Loading/>}
             <Box sx={{ backgroundColor: theme.palette.background.paper, borderRadius: '15px', py: 5, px: 4}}>
                 <Grid container item md={12} xs={12}>
                     <StyledTabs value={tabActive} onChange={handleChange} aria-label='wrapper'>

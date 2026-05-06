@@ -32,12 +32,12 @@ const CardProduct = (props: TCartProduct) => {
     }
     const handleBuyProductToCart = (item: TProduct) => {
 
-        router.push({
-            pathname: WEBSITE_CART,
-            query: {
-                selected: item?._id
-            }
-        }, WEBSITE_CART)
+        // router.push({
+        //     pathname: WEBSITE_CART,
+        //     query: {
+        //         selected: item?._id
+        //     }
+        // }, WEBSITE_CART)
     }
     return (
         <StyleCard sx={{ width: "100%" }}>

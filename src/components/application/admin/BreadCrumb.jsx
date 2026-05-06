@@ -1,7 +1,7 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
 import React from 'react'
 
-const BreadCrumb = ({ breadcrumbData}) => {
+const BreadCrumb = ({ breadcrumbData }) => {
   return (
     <Breadcrumb className='mb-5 ml-5'>
         <BreadcrumbList>

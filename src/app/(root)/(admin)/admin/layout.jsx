@@ -1,59 +1,43 @@
 'use client'
-import AppSidebar from '@/components/Application/Admin/AppSidebar'
-import ThemeProvider from '@/components/Application/Admin/ThemeProvider'
-import TopBar from '@/components/Application/Admin/Topbar'
-import { SidebarProvider } from '@/components/ui/sidebar'
-import { CssBaseline } from '@mui/material'
 import React, { useState } from 'react'
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import useWindowSize from '@/hooks/useWindowSize'
-
+import AppSidebar from '@/components/Application/Admin/AppSidebar'
+import TopBar from '@/components/Application/Admin/Topbar'
+import ThemeProvider from '@/components/Application/Admin/ThemeProvider'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 
 const AdminLayout = ({ children }) => {
-  const [open, setOpen] = React.useState(false)
-  
-  const toggleDrawer = () => {
-    setOpen(!open)
-  }
-  
-const size = useWindowSize()
-  return (
-    <ThemeProvider 
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-      <CssBaseline />
-      <SidebarProvider>
+  const [mobileOpen, setMobileOpen] = useState(false)
 
-        {size.width > 1024 ? 
-        <AppSidebar toggleDrawer={toggleDrawer} open={open}/> 
-        :
-        <Sheet className='lg:hidden' open={open} onOpenChange={toggleDrawer}>
-                {/* <SheetTrigger>Open</SheetTrigger> */}
-                <SheetContent side='left' className="bg-white">
-                    <SheetHeader>
-                        <SheetTitle>Sidebar</SheetTitle>
-                        <SheetDescription></SheetDescription>
-                    </SheetHeader>
-                    <div className='mt-5'>
-                        <AppSidebar toggleDrawer={toggleDrawer} open={open}/>
-              
-                    </div>
-                </SheetContent>
-            </Sheet>
-        }
-        <main className='border-2 md:w-[calc(100vw-16rem)] w-full'>
-          <div className='pt-[70px]  min-h-[calc(100vh-40px)] pb-10 relative '>
-            <TopBar toggleDrawer={toggleDrawer} open={open}/>
+  return (
+    <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+      <div className='flex h-screen bg-gray-50 dark:bg-gray-950 overflow-hidden'>
+        {/* Sidebar — desktop */}
+        <div className='hidden lg:block'>
+          <AppSidebar />
+        </div>
+
+        {/* Sidebar — mobile sheet */}
+        <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+          <SheetContent side='left' className='p-0 w-64 bg-white dark:bg-gray-900'>
+            <SheetHeader className='sr-only'>
+              <SheetTitle>Navigation</SheetTitle>
+              <SheetDescription />
+            </SheetHeader>
+            <AppSidebar />
+          </SheetContent>
+        </Sheet>
+
+        {/* Main */}
+        <div className='flex-1 flex flex-col overflow-hidden'>
+          <TopBar toggleDrawer={() => setMobileOpen(true)} />
+          <main className='flex-1 overflow-y-auto p-6'>
             {children}
-          </div>
-          <div className='border-t h-[40px] flex justify-center items-center bg-gray-500 dark:bg-background text-sm'>
-            2025 Developer All right reserved
-          </div>
-        </main>
-      </SidebarProvider>
+          </main>
+          <footer className='h-10 border-t flex items-center justify-center text-xs text-gray-400 bg-white dark:bg-gray-900 shrink-0'>
+            © 2025 GreenCraze — All rights reserved
+          </footer>
+        </div>
+      </div>
     </ThemeProvider>
   )
 }
