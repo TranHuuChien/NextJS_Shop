@@ -3,7 +3,6 @@ import React, { Suspense, useState } from 'react';
 import { persistor, store } from '@/store/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import Loading from './Loading'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import AuthContextExports from '@/context/AuthContext'
@@ -26,7 +25,7 @@ const GlobalProvider = ({ children }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <PersistGate persistor={persistor} loading={<Loading />}>
+        <PersistGate persistor={persistor} loading={null}>
           <AuthContextExports.AuthContextProvider>
             {children}
             <ToastContainer position="top-right" autoClose={3000} />

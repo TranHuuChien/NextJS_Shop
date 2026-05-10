@@ -1,8 +1,17 @@
 "use client"
 import { configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // localStorage
 import { authSlice } from './reducer/authSlice';
+
+const createNoopStorage = () => ({
+    getItem(_key: string) { return Promise.resolve(null) },
+    setItem(_key: string, value: unknown) { return Promise.resolve(value) },
+    removeItem(_key: string) { return Promise.resolve() },
+})
+
+const storage = typeof window !== 'undefined'
+    ? require('redux-persist/lib/storage').default
+    : createNoopStorage()
 //import langReducer from './reducer/langReducer';
 
 import { combineReducers } from '@reduxjs/toolkit'
